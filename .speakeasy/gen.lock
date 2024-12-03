@@ -1,0 +1,350 @@
+lockVersion: 2.0.0
+id: 6001198f-1296-495e-92b0-9e0dfa3802c0
+management:
+  docChecksum: 0e52f6b4fd7913923086c90bd95210e3
+  docVersion: 1.0.19
+  speakeasyVersion: 1.449.0
+  generationVersion: 2.467.4
+  releaseVersion: 0.0.1
+  configChecksum: 8c7ea55bc5a9bae0885a4400176754ae
+features:
+  typescript:
+    acceptHeaders: 2.81.2
+    additionalDependencies: 0.1.0
+    constsAndDefaults: 0.1.11
+    core: 3.18.7
+    defaultEnabledRetries: 0.1.0
+    devContainers: 2.90.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.1.2
+    globalSecurity: 2.82.11
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.82.4
+    methodSecurity: 2.82.4
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.2.0
+    uploadStreams: 0.1.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .eslintrc.cjs
+  - .gitattributes
+  - .npmignore
+  - CONTRIBUTING.md
+  - FUNCTIONS.md
+  - RUNTIMES.md
+  - USAGE.md
+  - docs/lib/utils/retryconfig.md
+  - docs/models/components/apiresponse.md
+  - docs/models/components/category.md
+  - docs/models/components/order1.md
+  - docs/models/components/orderstatus.md
+  - docs/models/components/pet2.md
+  - docs/models/components/security.md
+  - docs/models/components/status.md
+  - docs/models/components/tag.md
+  - docs/models/components/user2.md
+  - docs/models/operations/addpetformresponse.md
+  - docs/models/operations/addpetjsonresponse.md
+  - docs/models/operations/addpetrawresponse.md
+  - docs/models/operations/createuserformresponse.md
+  - docs/models/operations/createuserjsonresponse.md
+  - docs/models/operations/createuserrawresponse.md
+  - docs/models/operations/createuserswithlistinputresponse.md
+  - docs/models/operations/deleteorderrequest.md
+  - docs/models/operations/deletepetrequest.md
+  - docs/models/operations/deleteuserrequest.md
+  - docs/models/operations/findpetsbystatusrequest.md
+  - docs/models/operations/findpetsbystatusresponse.md
+  - docs/models/operations/findpetsbytagsrequest.md
+  - docs/models/operations/findpetsbytagsresponse.md
+  - docs/models/operations/getinventorysecurity.md
+  - docs/models/operations/getorderbyidrequest.md
+  - docs/models/operations/getorderbyidresponse.md
+  - docs/models/operations/getpetbyidrequest.md
+  - docs/models/operations/getpetbyidresponse.md
+  - docs/models/operations/getpetbyidsecurity.md
+  - docs/models/operations/getuserbynamerequest.md
+  - docs/models/operations/getuserbynameresponse.md
+  - docs/models/operations/loginuserrequest.md
+  - docs/models/operations/loginuserresponse.md
+  - docs/models/operations/loginuserresponseresult.md
+  - docs/models/operations/status.md
+  - docs/models/operations/updatepetformresponse.md
+  - docs/models/operations/updatepetjsonresponse.md
+  - docs/models/operations/updatepetrawresponse.md
+  - docs/models/operations/updatepetwithformrequest.md
+  - docs/models/operations/updateuserformrequest.md
+  - docs/models/operations/updateuserjsonrequest.md
+  - docs/models/operations/updateuserrawrequest.md
+  - docs/models/operations/uploadfilerequest.md
+  - docs/sdks/pet/README.md
+  - docs/sdks/petstore/README.md
+  - docs/sdks/store/README.md
+  - docs/sdks/user/README.md
+  - jsr.json
+  - package.json
+  - src/core.ts
+  - src/funcs/petAddPetForm.ts
+  - src/funcs/petAddPetJson.ts
+  - src/funcs/petAddPetRaw.ts
+  - src/funcs/petDeletePet.ts
+  - src/funcs/petFindPetsByStatus.ts
+  - src/funcs/petFindPetsByTags.ts
+  - src/funcs/petGetPetById.ts
+  - src/funcs/petUpdatePetForm.ts
+  - src/funcs/petUpdatePetJson.ts
+  - src/funcs/petUpdatePetRaw.ts
+  - src/funcs/petUpdatePetWithForm.ts
+  - src/funcs/petUploadFile.ts
+  - src/funcs/storeDeleteOrder.ts
+  - src/funcs/storeGetInventory.ts
+  - src/funcs/storeGetOrderById.ts
+  - src/funcs/storePlaceOrderForm.ts
+  - src/funcs/storePlaceOrderJson.ts
+  - src/funcs/storePlaceOrderRaw.ts
+  - src/funcs/userCreateUserForm.ts
+  - src/funcs/userCreateUserJson.ts
+  - src/funcs/userCreateUserRaw.ts
+  - src/funcs/userCreateUsersWithListInput.ts
+  - src/funcs/userDeleteUser.ts
+  - src/funcs/userGetUserByName.ts
+  - src/funcs/userLoginUser.ts
+  - src/funcs/userLogoutUser.ts
+  - src/funcs/userUpdateUserForm.ts
+  - src/funcs/userUpdateUserJson.ts
+  - src/funcs/userUpdateUserRaw.ts
+  - src/hooks/hooks.ts
+  - src/hooks/index.ts
+  - src/hooks/types.ts
+  - src/index.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/dlv.ts
+  - src/lib/encodings.ts
+  - src/lib/env.ts
+  - src/lib/files.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/logger.ts
+  - src/lib/matchers.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
+  - src/models/components/apiresponse.ts
+  - src/models/components/category.ts
+  - src/models/components/index.ts
+  - src/models/components/order1.ts
+  - src/models/components/pet2.ts
+  - src/models/components/security.ts
+  - src/models/components/tag.ts
+  - src/models/components/user2.ts
+  - src/models/errors/apierror.ts
+  - src/models/errors/httpclienterrors.ts
+  - src/models/errors/index.ts
+  - src/models/errors/sdkvalidationerror.ts
+  - src/models/operations/addpetform.ts
+  - src/models/operations/addpetjson.ts
+  - src/models/operations/addpetraw.ts
+  - src/models/operations/createuserform.ts
+  - src/models/operations/createuserjson.ts
+  - src/models/operations/createuserraw.ts
+  - src/models/operations/createuserswithlistinput.ts
+  - src/models/operations/deleteorder.ts
+  - src/models/operations/deletepet.ts
+  - src/models/operations/deleteuser.ts
+  - src/models/operations/findpetsbystatus.ts
+  - src/models/operations/findpetsbytags.ts
+  - src/models/operations/getinventory.ts
+  - src/models/operations/getorderbyid.ts
+  - src/models/operations/getpetbyid.ts
+  - src/models/operations/getuserbyname.ts
+  - src/models/operations/index.ts
+  - src/models/operations/loginuser.ts
+  - src/models/operations/updatepetform.ts
+  - src/models/operations/updatepetjson.ts
+  - src/models/operations/updatepetraw.ts
+  - src/models/operations/updatepetwithform.ts
+  - src/models/operations/updateuserform.ts
+  - src/models/operations/updateuserjson.ts
+  - src/models/operations/updateuserraw.ts
+  - src/models/operations/uploadfile.ts
+  - src/sdk/index.ts
+  - src/sdk/pet.ts
+  - src/sdk/sdk.ts
+  - src/sdk/store.ts
+  - src/sdk/user.ts
+  - src/types/blobs.ts
+  - src/types/constdatetime.ts
+  - src/types/enums.ts
+  - src/types/fp.ts
+  - src/types/index.ts
+  - src/types/operations.ts
+  - src/types/rfcdate.ts
+  - src/types/streams.ts
+  - tsconfig.json
+examples:
+  updatePet:
+    speakeasy-default-update-pet-json:
+      responses:
+        "200":
+          application/xml: "0x6a842783ea"
+    speakeasy-default-update-pet-raw:
+      responses:
+        "200":
+          application/xml: "0x6C7D6C5f13"
+    speakeasy-default-update-pet-form:
+      responses:
+        "200":
+          application/xml: "0xf8BEcfd4dD"
+  addPet:
+    speakeasy-default-add-pet-json:
+      responses:
+        "200":
+          application/xml: "0xBfCAfA13bD"
+          application/json: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": []}
+    speakeasy-default-add-pet-raw:
+      responses:
+        "200":
+          application/xml: "0xc58Cd683A3"
+          application/json: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>", "<value>"]}
+    speakeasy-default-add-pet-form:
+      requestBody:
+        application/x-www-form-urlencoded: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": []}
+      responses:
+        "200":
+          application/xml: "0xDc4d65Fa0E"
+          application/json: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>"]}
+  findPetsByStatus:
+    speakeasy-default-find-pets-by-status:
+      responses:
+        "200":
+          application/xml: "0xB072B0a632"
+          application/json: []
+  findPetsByTags:
+    speakeasy-default-find-pets-by-tags:
+      responses:
+        "200":
+          application/xml: "0x6CfbAC3e8b"
+          application/json: [{"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>"]}, {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>", "<value>", "<value>"]}, {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>", "<value>", "<value>"]}]
+  getPetById:
+    speakeasy-default-get-pet-by-id:
+      parameters:
+        path:
+          petId: 504151
+      responses:
+        "200":
+          application/xml: "0x0b23Cfd42B"
+          application/json: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>", "<value>", "<value>"]}
+  updatePetWithForm:
+    speakeasy-default-update-pet-with-form:
+      parameters:
+        path:
+          petId: 303241
+        query: {}
+  deletePet:
+    speakeasy-default-delete-pet:
+      parameters:
+        path:
+          petId: 441876
+        header: {}
+  uploadFile:
+    speakeasy-default-upload-file:
+      parameters:
+        path:
+          petId: 565380
+        query: {}
+  getInventory:
+    speakeasy-default-get-inventory:
+      responses:
+        "200":
+          application/json: {"key": 373538}
+  placeOrder:
+    speakeasy-default-place-order-raw:
+      responses:
+        "200":
+          application/json: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
+    speakeasy-default-place-order-form:
+      requestBody:
+        application/x-www-form-urlencoded: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
+      responses:
+        "200":
+          application/json: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
+    speakeasy-default-place-order-json:
+      responses:
+        "200":
+          application/json: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
+  getOrderById:
+    speakeasy-default-get-order-by-id:
+      parameters:
+        path:
+          orderId: 614993
+      responses:
+        "200":
+          application/xml: "0x51EB64dCdd"
+          application/json: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
+  deleteOrder:
+    speakeasy-default-delete-order:
+      parameters:
+        path:
+          orderId: 127902
+  createUser:
+    speakeasy-default-create-user-json:
+      responses:
+        default:
+          application/xml: "0xdF8B4DBd5B"
+    speakeasy-default-create-user-raw:
+      responses:
+        default:
+          application/xml: "0xBdBEe6E5bE"
+    speakeasy-default-create-user-form:
+      responses:
+        default:
+          application/xml: "0xcBc71Bde80"
+  createUsersWithListInput:
+    speakeasy-default-create-users-with-list-input:
+      responses:
+        "200":
+          application/xml: "0x2C0b2D5cEE"
+  loginUser:
+    speakeasy-default-login-user:
+      responses:
+        "200":
+          application/xml: "<value>"
+          application/json: "<value>"
+  logoutUser: {}
+  getUserByName:
+    speakeasy-default-get-user-by-name:
+      parameters:
+        path:
+          username: "Zachery_Lubowitz15"
+      responses:
+        "200":
+          application/xml: "0xb60ad6AdFe"
+  updateUser:
+    speakeasy-default-update-user-form:
+      parameters:
+        path:
+          username: "Bo.Beatty-Mraz90"
+      requestBody:
+        application/x-www-form-urlencoded: {"id": 10, "username": "theUser", "firstName": "John", "lastName": "James", "email": "john@email.com", "password": "12345", "phone": "12345", "userStatus": 1}
+    speakeasy-default-update-user-json:
+      parameters:
+        path:
+          username: "Alanna98"
+    speakeasy-default-update-user-raw:
+      parameters:
+        path:
+          username: "Maximus_Gulgowski38"
+  deleteUser:
+    speakeasy-default-delete-user:
+      parameters:
+        path:
+          username: "Demetris_Schmitt"
+generatedTests: {}
