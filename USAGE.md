@@ -8,7 +8,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.updatePetJson(
+  const result = await petstore.pets.updateForm(
     await openAsBlob("example.file"),
   );
 

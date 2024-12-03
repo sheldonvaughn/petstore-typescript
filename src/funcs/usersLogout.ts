@@ -4,9 +4,7 @@
 
 import * as z from "zod";
 import { PetstoreCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
-import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -19,15 +17,13 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Deletes a pet
+ * Logs out current logged in user session
  */
-export async function petDeletePet(
+export async function usersLogout(
   client: PetstoreCore,
-  request: operations.DeletePetRequest,
   options?: RequestOptions,
 ): Promise<
   Result<
@@ -41,32 +37,10 @@ export async function petDeletePet(
     | ConnectionError
   >
 > {
-  const parsed = safeParse(
-    request,
-    (value) => operations.DeletePetRequest$outboundSchema.parse(value),
-    "Input validation failed",
-  );
-  if (!parsed.ok) {
-    return parsed;
-  }
-  const payload = parsed.value;
-  const body = null;
-
-  const pathParams = {
-    petId: encodeSimple("petId", payload.petId, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-
-  const path = pathToFunc("/pet/{petId}")(pathParams);
+  const path = pathToFunc("/user/logout")();
 
   const headers = new Headers({
     Accept: "*/*",
-    "api_key": encodeSimple("api_key", payload.api_key, {
-      explode: false,
-      charEncoding: "none",
-    }),
   });
 
   const secConfig = await extractSecurity(client._options.petstoreAuth);
@@ -74,7 +48,7 @@ export async function petDeletePet(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "deletePet",
+    operationID: "logoutUser",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -88,10 +62,9 @@ export async function petDeletePet(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "DELETE",
+    method: "GET",
     path: path,
     headers: headers,
-    body: body,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -101,7 +74,7 @@ export async function petDeletePet(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["400", "4XX", "5XX"],
+    errorCodes: ["4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -120,8 +93,8 @@ export async function petDeletePet(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.fail([400, "4XX", "5XX"]),
-    M.nil("2XX", z.void()),
+    M.fail(["4XX", "5XX"]),
+    M.nil("default", z.void()),
   )(response);
   if (!result.ok) {
     return result;

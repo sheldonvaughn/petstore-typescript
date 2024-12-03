@@ -3,13 +3,12 @@
  */
 
 import { PetstoreCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
-import * as components from "../models/components/index.js";
 import { APIError } from "../models/errors/apierror.js";
 import {
   ConnectionError,
@@ -22,16 +21,24 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
+export enum FindByStatusAcceptEnum {
+  applicationJson = "application/json",
+  applicationXml = "application/xml",
+}
+
 /**
- * uploads an image
+ * Finds Pets by status
+ *
+ * @remarks
+ * Multiple status values can be provided with comma separated strings
  */
-export async function petUploadFile(
+export async function petsFindByStatus(
   client: PetstoreCore,
-  request: operations.UploadFileRequest,
-  options?: RequestOptions,
+  request: operations.FindPetsByStatusRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: FindByStatusAcceptEnum },
 ): Promise<
   Result<
-    components.ApiResponse,
+    operations.FindPetsByStatusResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -43,31 +50,24 @@ export async function petUploadFile(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.UploadFileRequest$outboundSchema.parse(value),
+    (value) => operations.FindPetsByStatusRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return parsed;
   }
   const payload = parsed.value;
-  const body = payload.RequestBody;
+  const body = null;
 
-  const pathParams = {
-    petId: encodeSimple("petId", payload.petId, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-
-  const path = pathToFunc("/pet/{petId}/uploadImage")(pathParams);
+  const path = pathToFunc("/pet/findByStatus")();
 
   const query = encodeFormQuery({
-    "additionalMetadata": payload.additionalMetadata,
+    "status": payload.status,
   });
 
   const headers = new Headers({
-    "Content-Type": "application/octet-stream",
-    Accept: "application/json",
+    Accept: options?.acceptHeaderOverride
+      || "application/json;q=1, application/xml;q=0",
   });
 
   const secConfig = await extractSecurity(client._options.petstoreAuth);
@@ -75,7 +75,7 @@ export async function petUploadFile(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "uploadFile",
+    operationID: "findPetsByStatus",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -89,7 +89,7 @@ export async function petUploadFile(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "POST",
+    method: "GET",
     path: path,
     headers: headers,
     query: query,
@@ -103,7 +103,7 @@ export async function petUploadFile(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["400", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -113,7 +113,7 @@ export async function petUploadFile(
   const response = doResult.value;
 
   const [result] = await M.match<
-    components.ApiResponse,
+    operations.FindPetsByStatusResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -122,8 +122,11 @@ export async function petUploadFile(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, components.ApiResponse$inboundSchema),
-    M.fail(["4XX", "5XX"]),
+    M.bytes(200, operations.FindPetsByStatusResponse$inboundSchema, {
+      ctype: "application/xml",
+    }),
+    M.json(200, operations.FindPetsByStatusResponse$inboundSchema),
+    M.fail([400, "4XX", "5XX"]),
   )(response);
   if (!result.ok) {
     return result;

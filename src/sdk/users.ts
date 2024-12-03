@@ -3,66 +3,64 @@
  */
 
 import {
-  CreateUserFormAcceptEnum,
-  userCreateUserForm,
-} from "../funcs/userCreateUserForm.js";
+  CreateFormAcceptEnum,
+  usersCreateForm,
+} from "../funcs/usersCreateForm.js";
 import {
-  CreateUserJsonAcceptEnum,
-  userCreateUserJson,
-} from "../funcs/userCreateUserJson.js";
+  CreateJsonAcceptEnum,
+  usersCreateJson,
+} from "../funcs/usersCreateJson.js";
 import {
-  CreateUserRawAcceptEnum,
-  userCreateUserRaw,
-} from "../funcs/userCreateUserRaw.js";
+  CreateRawAcceptEnum,
+  usersCreateRaw,
+} from "../funcs/usersCreateRaw.js";
 import {
-  CreateUsersWithListInputAcceptEnum,
-  userCreateUsersWithListInput,
-} from "../funcs/userCreateUsersWithListInput.js";
-import { userDeleteUser } from "../funcs/userDeleteUser.js";
+  CreateWithListAcceptEnum,
+  usersCreateWithList,
+} from "../funcs/usersCreateWithList.js";
+import { usersDelete } from "../funcs/usersDelete.js";
 import {
-  GetUserByNameAcceptEnum,
-  userGetUserByName,
-} from "../funcs/userGetUserByName.js";
-import { LoginUserAcceptEnum, userLoginUser } from "../funcs/userLoginUser.js";
-import { userLogoutUser } from "../funcs/userLogoutUser.js";
-import { userUpdateUserForm } from "../funcs/userUpdateUserForm.js";
-import { userUpdateUserJson } from "../funcs/userUpdateUserJson.js";
-import { userUpdateUserRaw } from "../funcs/userUpdateUserRaw.js";
+  GetByNameAcceptEnum,
+  usersGetByName,
+} from "../funcs/usersGetByName.js";
+import { LoginAcceptEnum, usersLogin } from "../funcs/usersLogin.js";
+import { usersLogout } from "../funcs/usersLogout.js";
+import { usersUpdateForm } from "../funcs/usersUpdateForm.js";
+import { usersUpdateJson } from "../funcs/usersUpdateJson.js";
+import { usersUpdateRaw } from "../funcs/usersUpdateRaw.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
-export { CreateUserJsonAcceptEnum } from "../funcs/userCreateUserJson.js";
+export { CreateJsonAcceptEnum } from "../funcs/usersCreateJson.js";
 
-export { CreateUserRawAcceptEnum } from "../funcs/userCreateUserRaw.js";
+export { CreateRawAcceptEnum } from "../funcs/usersCreateRaw.js";
 
-export { CreateUserFormAcceptEnum } from "../funcs/userCreateUserForm.js";
+export { CreateFormAcceptEnum } from "../funcs/usersCreateForm.js";
 
-export { CreateUsersWithListInputAcceptEnum } from "../funcs/userCreateUsersWithListInput.js";
+export { CreateWithListAcceptEnum } from "../funcs/usersCreateWithList.js";
 
-export { LoginUserAcceptEnum } from "../funcs/userLoginUser.js";
+export { LoginAcceptEnum } from "../funcs/usersLogin.js";
 
-export { GetUserByNameAcceptEnum } from "../funcs/userGetUserByName.js";
+export { GetByNameAcceptEnum } from "../funcs/usersGetByName.js";
 
-export class User extends ClientSDK {
+export class Users extends ClientSDK {
   /**
    * Create user
    *
    * @remarks
    * This can only be done by the logged in user.
    */
-  async createUserJson(
+  async createJson(
     request?:
       | ReadableStream<Uint8Array>
       | Blob
       | ArrayBuffer
       | Uint8Array
       | undefined,
-    options?: RequestOptions & {
-      acceptHeaderOverride?: CreateUserJsonAcceptEnum;
-    },
+    options?: RequestOptions & { acceptHeaderOverride?: CreateJsonAcceptEnum },
   ): Promise<operations.CreateUserJsonResponse> {
-    return unwrapAsync(userCreateUserJson(
+    return unwrapAsync(usersCreateJson(
       this,
       request,
       options,
@@ -75,18 +73,16 @@ export class User extends ClientSDK {
    * @remarks
    * This can only be done by the logged in user.
    */
-  async createUserRaw(
+  async createRaw(
     request?:
       | ReadableStream<Uint8Array>
       | Blob
       | ArrayBuffer
       | Uint8Array
       | undefined,
-    options?: RequestOptions & {
-      acceptHeaderOverride?: CreateUserRawAcceptEnum;
-    },
+    options?: RequestOptions & { acceptHeaderOverride?: CreateRawAcceptEnum },
   ): Promise<operations.CreateUserRawResponse> {
-    return unwrapAsync(userCreateUserRaw(
+    return unwrapAsync(usersCreateRaw(
       this,
       request,
       options,
@@ -99,18 +95,16 @@ export class User extends ClientSDK {
    * @remarks
    * This can only be done by the logged in user.
    */
-  async createUserForm(
+  async createForm(
     request?:
       | ReadableStream<Uint8Array>
       | Blob
       | ArrayBuffer
       | Uint8Array
       | undefined,
-    options?: RequestOptions & {
-      acceptHeaderOverride?: CreateUserFormAcceptEnum;
-    },
+    options?: RequestOptions & { acceptHeaderOverride?: CreateFormAcceptEnum },
   ): Promise<operations.CreateUserFormResponse> {
-    return unwrapAsync(userCreateUserForm(
+    return unwrapAsync(usersCreateForm(
       this,
       request,
       options,
@@ -123,15 +117,15 @@ export class User extends ClientSDK {
    * @remarks
    * Creates list of users with given input array
    */
-  async createUsersWithListInput(
+  async createWithList(
     request?:
       | Array<ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array>
       | undefined,
     options?: RequestOptions & {
-      acceptHeaderOverride?: CreateUsersWithListInputAcceptEnum;
+      acceptHeaderOverride?: CreateWithListAcceptEnum;
     },
   ): Promise<operations.CreateUsersWithListInputResponse | undefined> {
-    return unwrapAsync(userCreateUsersWithListInput(
+    return unwrapAsync(usersCreateWithList(
       this,
       request,
       options,
@@ -141,11 +135,11 @@ export class User extends ClientSDK {
   /**
    * Logs user into the system
    */
-  async loginUser(
+  async login(
     request: operations.LoginUserRequest,
-    options?: RequestOptions & { acceptHeaderOverride?: LoginUserAcceptEnum },
+    options?: RequestOptions & { acceptHeaderOverride?: LoginAcceptEnum },
   ): Promise<operations.LoginUserResponse> {
-    return unwrapAsync(userLoginUser(
+    return unwrapAsync(usersLogin(
       this,
       request,
       options,
@@ -155,10 +149,10 @@ export class User extends ClientSDK {
   /**
    * Logs out current logged in user session
    */
-  async logoutUser(
+  async logout(
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(userLogoutUser(
+    return unwrapAsync(usersLogout(
       this,
       options,
     ));
@@ -167,13 +161,11 @@ export class User extends ClientSDK {
   /**
    * Get user by user name
    */
-  async getUserByName(
+  async getByName(
     request: operations.GetUserByNameRequest,
-    options?: RequestOptions & {
-      acceptHeaderOverride?: GetUserByNameAcceptEnum;
-    },
+    options?: RequestOptions & { acceptHeaderOverride?: GetByNameAcceptEnum },
   ): Promise<operations.GetUserByNameResponse> {
-    return unwrapAsync(userGetUserByName(
+    return unwrapAsync(usersGetByName(
       this,
       request,
       options,
@@ -186,11 +178,11 @@ export class User extends ClientSDK {
    * @remarks
    * This can only be done by the logged in user.
    */
-  async updateUserJson(
+  async updateJson(
     request: operations.UpdateUserJsonRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(userUpdateUserJson(
+    return unwrapAsync(usersUpdateJson(
       this,
       request,
       options,
@@ -203,11 +195,11 @@ export class User extends ClientSDK {
    * @remarks
    * This can only be done by the logged in user.
    */
-  async updateUserRaw(
+  async updateRaw(
     request: operations.UpdateUserRawRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(userUpdateUserRaw(
+    return unwrapAsync(usersUpdateRaw(
       this,
       request,
       options,
@@ -220,11 +212,11 @@ export class User extends ClientSDK {
    * @remarks
    * This can only be done by the logged in user.
    */
-  async updateUserForm(
+  async updateForm(
     request: operations.UpdateUserFormRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(userUpdateUserForm(
+    return unwrapAsync(usersUpdateForm(
       this,
       request,
       options,
@@ -237,11 +229,11 @@ export class User extends ClientSDK {
    * @remarks
    * This can only be done by the logged in user.
    */
-  async deleteUser(
+  async delete(
     request: operations.DeleteUserRequest,
     options?: RequestOptions,
   ): Promise<void> {
-    return unwrapAsync(userDeleteUser(
+    return unwrapAsync(usersDelete(
       this,
       request,
       options,

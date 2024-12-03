@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 6001198f-1296-495e-92b0-9e0dfa3802c0
 management:
-  docChecksum: 0e52f6b4fd7913923086c90bd95210e3
+  docChecksum: 708740b1e387b579cbfb30e573e59123
   docVersion: 1.0.19
   speakeasyVersion: 1.449.0
   generationVersion: 2.467.4
-  releaseVersion: 0.0.2
-  configChecksum: 4aeaf3e368bfa6824e09f902783d2f47
+  releaseVersion: 0.1.0
+  configChecksum: e6cadf24b63f60ce9782364300d9ce6b
   installationURL: https://github.com/sheldonvaughn/petstore-typescript
 features:
   typescript:
@@ -22,7 +22,9 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.4
+    groups: 2.81.2
     methodSecurity: 2.82.4
+    nameOverrides: 2.81.2
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
@@ -82,42 +84,42 @@ generatedFiles:
   - docs/models/operations/updateuserjsonrequest.md
   - docs/models/operations/updateuserrawrequest.md
   - docs/models/operations/uploadfilerequest.md
-  - docs/sdks/pet/README.md
+  - docs/sdks/pets/README.md
   - docs/sdks/petstore/README.md
   - docs/sdks/store/README.md
-  - docs/sdks/user/README.md
+  - docs/sdks/users/README.md
   - jsr.json
   - package.json
   - src/core.ts
-  - src/funcs/petAddPetForm.ts
-  - src/funcs/petAddPetJson.ts
-  - src/funcs/petAddPetRaw.ts
-  - src/funcs/petDeletePet.ts
-  - src/funcs/petFindPetsByStatus.ts
-  - src/funcs/petFindPetsByTags.ts
-  - src/funcs/petGetPetById.ts
-  - src/funcs/petUpdatePetForm.ts
-  - src/funcs/petUpdatePetJson.ts
-  - src/funcs/petUpdatePetRaw.ts
-  - src/funcs/petUpdatePetWithForm.ts
-  - src/funcs/petUploadFile.ts
+  - src/funcs/petsAddForm.ts
+  - src/funcs/petsAddJson.ts
+  - src/funcs/petsAddRaw.ts
+  - src/funcs/petsDelete.ts
+  - src/funcs/petsFindByStatus.ts
+  - src/funcs/petsFindByTags.ts
+  - src/funcs/petsGet.ts
+  - src/funcs/petsUpdateForm.ts
+  - src/funcs/petsUpdateJson.ts
+  - src/funcs/petsUpdateRaw.ts
+  - src/funcs/petsUpdateWithForm.ts
+  - src/funcs/petsUploadFile.ts
   - src/funcs/storeDeleteOrder.ts
   - src/funcs/storeGetInventory.ts
   - src/funcs/storeGetOrderById.ts
   - src/funcs/storePlaceOrderForm.ts
   - src/funcs/storePlaceOrderJson.ts
   - src/funcs/storePlaceOrderRaw.ts
-  - src/funcs/userCreateUserForm.ts
-  - src/funcs/userCreateUserJson.ts
-  - src/funcs/userCreateUserRaw.ts
-  - src/funcs/userCreateUsersWithListInput.ts
-  - src/funcs/userDeleteUser.ts
-  - src/funcs/userGetUserByName.ts
-  - src/funcs/userLoginUser.ts
-  - src/funcs/userLogoutUser.ts
-  - src/funcs/userUpdateUserForm.ts
-  - src/funcs/userUpdateUserJson.ts
-  - src/funcs/userUpdateUserRaw.ts
+  - src/funcs/usersCreateForm.ts
+  - src/funcs/usersCreateJson.ts
+  - src/funcs/usersCreateRaw.ts
+  - src/funcs/usersCreateWithList.ts
+  - src/funcs/usersDelete.ts
+  - src/funcs/usersGetByName.ts
+  - src/funcs/usersLogin.ts
+  - src/funcs/usersLogout.ts
+  - src/funcs/usersUpdateForm.ts
+  - src/funcs/usersUpdateJson.ts
+  - src/funcs/usersUpdateRaw.ts
   - src/hooks/hooks.ts
   - src/hooks/index.ts
   - src/hooks/types.ts
@@ -177,10 +179,10 @@ generatedFiles:
   - src/models/operations/updateuserraw.ts
   - src/models/operations/uploadfile.ts
   - src/sdk/index.ts
-  - src/sdk/pet.ts
+  - src/sdk/pets.ts
   - src/sdk/sdk.ts
   - src/sdk/store.ts
-  - src/sdk/user.ts
+  - src/sdk/users.ts
   - src/types/blobs.ts
   - src/types/constdatetime.ts
   - src/types/enums.ts

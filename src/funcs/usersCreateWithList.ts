@@ -4,6 +4,7 @@
 
 import * as z from "zod";
 import { PetstoreCore } from "../core.js";
+import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -21,24 +22,28 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
-export enum AddPetRawAcceptEnum {
+export enum CreateWithListAcceptEnum {
   applicationJson = "application/json",
   applicationXml = "application/xml",
 }
 
 /**
- * Add a new pet to the store
+ * Creates list of users with given input array
  *
  * @remarks
- * Add a new pet to the store
+ * Creates list of users with given input array
  */
-export async function petAddPetRaw(
+export async function usersCreateWithList(
   client: PetstoreCore,
-  request: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array,
-  options?: RequestOptions & { acceptHeaderOverride?: AddPetRawAcceptEnum },
+  request?:
+    | Array<ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array>
+    | undefined,
+  options?: RequestOptions & {
+    acceptHeaderOverride?: CreateWithListAcceptEnum;
+  },
 ): Promise<
   Result<
-    operations.AddPetRawResponse,
+    operations.CreateUsersWithListInputResponse | undefined,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -51,24 +56,28 @@ export async function petAddPetRaw(
   const parsed = safeParse(
     request,
     (value) =>
-      z.union([
-        z.instanceof(ReadableStream<Uint8Array>),
-        z.instanceof(Blob),
-        z.instanceof(ArrayBuffer),
-        z.instanceof(Uint8Array),
-      ]).parse(value),
+      z.array(
+        z.union([
+          z.instanceof(ReadableStream<Uint8Array>),
+          z.instanceof(Blob),
+          z.instanceof(ArrayBuffer),
+          z.instanceof(Uint8Array),
+        ]),
+      ).optional().parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return parsed;
   }
   const payload = parsed.value;
-  const body = payload;
+  const body = payload === undefined
+    ? null
+    : encodeJSON("body", payload, { explode: true });
 
-  const path = pathToFunc("/pet")();
+  const path = pathToFunc("/user/createWithList")();
 
   const headers = new Headers({
-    "Content-Type": "application/xml",
+    "Content-Type": "application/json",
     Accept: options?.acceptHeaderOverride
       || "application/json;q=1, application/xml;q=0",
   });
@@ -78,7 +87,7 @@ export async function petAddPetRaw(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "addPet_raw",
+    operationID: "createUsersWithListInput",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -105,7 +114,7 @@ export async function petAddPetRaw(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["405", "4XX", "5XX"],
+    errorCodes: ["4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -115,7 +124,7 @@ export async function petAddPetRaw(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.AddPetRawResponse,
+    operations.CreateUsersWithListInputResponse | undefined,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -124,11 +133,20 @@ export async function petAddPetRaw(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.bytes(200, operations.AddPetRawResponse$inboundSchema, {
-      ctype: "application/xml",
-    }),
-    M.json(200, operations.AddPetRawResponse$inboundSchema),
-    M.fail([405, "4XX", "5XX"]),
+    M.bytes(
+      200,
+      operations.CreateUsersWithListInputResponse$inboundSchema.optional(),
+      { ctype: "application/xml" },
+    ),
+    M.json(
+      200,
+      operations.CreateUsersWithListInputResponse$inboundSchema.optional(),
+    ),
+    M.fail(["4XX", "5XX"]),
+    M.nil(
+      "default",
+      operations.CreateUsersWithListInputResponse$inboundSchema.optional(),
+    ),
   )(response);
   if (!result.ok) {
     return result;

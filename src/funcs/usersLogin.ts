@@ -21,26 +21,21 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
-export enum FindPetsByStatusAcceptEnum {
+export enum LoginAcceptEnum {
   applicationJson = "application/json",
   applicationXml = "application/xml",
 }
 
 /**
- * Finds Pets by status
- *
- * @remarks
- * Multiple status values can be provided with comma separated strings
+ * Logs user into the system
  */
-export async function petFindPetsByStatus(
+export async function usersLogin(
   client: PetstoreCore,
-  request: operations.FindPetsByStatusRequest,
-  options?: RequestOptions & {
-    acceptHeaderOverride?: FindPetsByStatusAcceptEnum;
-  },
+  request: operations.LoginUserRequest,
+  options?: RequestOptions & { acceptHeaderOverride?: LoginAcceptEnum },
 ): Promise<
   Result<
-    operations.FindPetsByStatusResponse,
+    operations.LoginUserResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -52,7 +47,7 @@ export async function petFindPetsByStatus(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.FindPetsByStatusRequest$outboundSchema.parse(value),
+    (value) => operations.LoginUserRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -61,10 +56,11 @@ export async function petFindPetsByStatus(
   const payload = parsed.value;
   const body = null;
 
-  const path = pathToFunc("/pet/findByStatus")();
+  const path = pathToFunc("/user/login")();
 
   const query = encodeFormQuery({
-    "status": payload.status,
+    "password": payload.password,
+    "username": payload.username,
   });
 
   const headers = new Headers({
@@ -77,7 +73,7 @@ export async function petFindPetsByStatus(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "findPetsByStatus",
+    operationID: "loginUser",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -114,8 +110,12 @@ export async function petFindPetsByStatus(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
-    operations.FindPetsByStatusResponse,
+    operations.LoginUserResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -124,12 +124,17 @@ export async function petFindPetsByStatus(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.bytes(200, operations.FindPetsByStatusResponse$inboundSchema, {
+    M.text(200, operations.LoginUserResponse$inboundSchema, {
       ctype: "application/xml",
+      hdrs: true,
+      key: "Result",
     }),
-    M.json(200, operations.FindPetsByStatusResponse$inboundSchema),
+    M.json(200, operations.LoginUserResponse$inboundSchema, {
+      hdrs: true,
+      key: "Result",
+    }),
     M.fail([400, "4XX", "5XX"]),
-  )(response);
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return result;
   }

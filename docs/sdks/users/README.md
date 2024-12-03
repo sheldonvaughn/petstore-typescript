@@ -1,25 +1,23 @@
-# User
-(*user*)
+# Users
+(*users*)
 
 ## Overview
 
-Operations about user
-
 ### Available Operations
 
-* [createUserJson](#createuserjson) - Create user
-* [createUserRaw](#createuserraw) - Create user
-* [createUserForm](#createuserform) - Create user
-* [createUsersWithListInput](#createuserswithlistinput) - Creates list of users with given input array
-* [loginUser](#loginuser) - Logs user into the system
-* [logoutUser](#logoutuser) - Logs out current logged in user session
-* [getUserByName](#getuserbyname) - Get user by user name
-* [updateUserJson](#updateuserjson) - Update user
-* [updateUserRaw](#updateuserraw) - Update user
-* [updateUserForm](#updateuserform) - Update user
-* [deleteUser](#deleteuser) - Delete user
+* [createJson](#createjson) - Create user
+* [createRaw](#createraw) - Create user
+* [createForm](#createform) - Create user
+* [createWithList](#createwithlist) - Creates list of users with given input array
+* [login](#login) - Logs user into the system
+* [logout](#logout) - Logs out current logged in user session
+* [getByName](#getbyname) - Get user by user name
+* [updateJson](#updatejson) - Update user
+* [updateRaw](#updateraw) - Update user
+* [updateForm](#updateform) - Update user
+* [delete](#delete) - Delete user
 
-## createUserJson
+## createJson
 
 This can only be done by the logged in user.
 
@@ -33,7 +31,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.user.createUserJson();
+  const result = await petstore.users.createJson();
 
   // Handle the result
   console.log(result);
@@ -48,7 +46,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userCreateUserJson } from "petstore/funcs/userCreateUserJson.js";
+import { usersCreateJson } from "petstore/funcs/usersCreateJson.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -57,7 +55,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userCreateUserJson(petstore);
+  const res = await usersCreateJson(petstore);
 
   if (!res.ok) {
     throw res.error;
@@ -91,7 +89,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## createUserRaw
+## createRaw
 
 This can only be done by the logged in user.
 
@@ -105,7 +103,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.user.createUserRaw();
+  const result = await petstore.users.createRaw();
 
   // Handle the result
   console.log(result);
@@ -120,7 +118,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userCreateUserRaw } from "petstore/funcs/userCreateUserRaw.js";
+import { usersCreateRaw } from "petstore/funcs/usersCreateRaw.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -129,7 +127,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userCreateUserRaw(petstore);
+  const res = await usersCreateRaw(petstore);
 
   if (!res.ok) {
     throw res.error;
@@ -163,7 +161,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## createUserForm
+## createForm
 
 This can only be done by the logged in user.
 
@@ -177,7 +175,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.user.createUserForm();
+  const result = await petstore.users.createForm();
 
   // Handle the result
   console.log(result);
@@ -192,7 +190,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userCreateUserForm } from "petstore/funcs/userCreateUserForm.js";
+import { usersCreateForm } from "petstore/funcs/usersCreateForm.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -201,7 +199,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userCreateUserForm(petstore);
+  const res = await usersCreateForm(petstore);
 
   if (!res.ok) {
     throw res.error;
@@ -235,7 +233,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## createUsersWithListInput
+## createWithList
 
 Creates list of users with given input array
 
@@ -249,7 +247,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.user.createUsersWithListInput();
+  const result = await petstore.users.createWithList();
 
   // Handle the result
   console.log(result);
@@ -264,7 +262,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userCreateUsersWithListInput } from "petstore/funcs/userCreateUsersWithListInput.js";
+import { usersCreateWithList } from "petstore/funcs/usersCreateWithList.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -273,7 +271,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userCreateUsersWithListInput(petstore);
+  const res = await usersCreateWithList(petstore);
 
   if (!res.ok) {
     throw res.error;
@@ -307,7 +305,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## loginUser
+## login
 
 Logs user into the system
 
@@ -321,7 +319,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.user.loginUser({});
+  const result = await petstore.users.login({});
 
   // Handle the result
   console.log(result);
@@ -336,7 +334,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userLoginUser } from "petstore/funcs/userLoginUser.js";
+import { usersLogin } from "petstore/funcs/usersLogin.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -345,7 +343,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userLoginUser(petstore, {});
+  const res = await usersLogin(petstore, {});
 
   if (!res.ok) {
     throw res.error;
@@ -379,7 +377,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## logoutUser
+## logout
 
 Logs out current logged in user session
 
@@ -393,7 +391,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  await petstore.user.logoutUser();
+  await petstore.users.logout();
 
 
 }
@@ -407,7 +405,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userLogoutUser } from "petstore/funcs/userLogoutUser.js";
+import { usersLogout } from "petstore/funcs/usersLogout.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -416,7 +414,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userLogoutUser(petstore);
+  const res = await usersLogout(petstore);
 
   if (!res.ok) {
     throw res.error;
@@ -448,7 +446,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getUserByName
+## getByName
 
 Get user by user name
 
@@ -462,7 +460,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.user.getUserByName({
+  const result = await petstore.users.getByName({
     username: "Zachery_Lubowitz15",
   });
 
@@ -479,7 +477,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userGetUserByName } from "petstore/funcs/userGetUserByName.js";
+import { usersGetByName } from "petstore/funcs/usersGetByName.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -488,7 +486,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userGetUserByName(petstore, {
+  const res = await usersGetByName(petstore, {
     username: "Zachery_Lubowitz15",
   });
 
@@ -524,7 +522,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## updateUserJson
+## updateJson
 
 This can only be done by the logged in user.
 
@@ -538,9 +536,9 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  await petstore.user.updateUserJson({
+  await petstore.users.updateJson({
     username: "Bo.Beatty-Mraz90",
-    user: bytesToStream(new TextEncoder().encode("0x0BB1FAFA0A")),
+    user: bytesToStream(new TextEncoder().encode("0xf50a1E1eAd")),
   });
 
 
@@ -555,7 +553,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userUpdateUserJson } from "petstore/funcs/userUpdateUserJson.js";
+import { usersUpdateJson } from "petstore/funcs/usersUpdateJson.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -564,9 +562,9 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userUpdateUserJson(petstore, {
+  const res = await usersUpdateJson(petstore, {
     username: "Bo.Beatty-Mraz90",
-    user: bytesToStream(new TextEncoder().encode("0x533AC6722A")),
+    user: bytesToStream(new TextEncoder().encode("0x4edE34cfbD")),
   });
 
   if (!res.ok) {
@@ -600,7 +598,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## updateUserRaw
+## updateRaw
 
 This can only be done by the logged in user.
 
@@ -614,9 +612,9 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  await petstore.user.updateUserRaw({
+  await petstore.users.updateRaw({
     username: "Bo.Beatty-Mraz90",
-    user: bytesToStream(new TextEncoder().encode("0xfD6F866B2b")),
+    user: bytesToStream(new TextEncoder().encode("0x963D8BbFe6")),
   });
 
 
@@ -631,7 +629,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userUpdateUserRaw } from "petstore/funcs/userUpdateUserRaw.js";
+import { usersUpdateRaw } from "petstore/funcs/usersUpdateRaw.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -640,9 +638,9 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userUpdateUserRaw(petstore, {
+  const res = await usersUpdateRaw(petstore, {
     username: "Bo.Beatty-Mraz90",
-    user: bytesToStream(new TextEncoder().encode("0xECbe22fd1d")),
+    user: bytesToStream(new TextEncoder().encode("0x3A8bE2FCf6")),
   });
 
   if (!res.ok) {
@@ -676,7 +674,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## updateUserForm
+## updateForm
 
 This can only be done by the logged in user.
 
@@ -690,7 +688,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  await petstore.user.updateUserForm({
+  await petstore.users.updateForm({
     username: "Bo.Beatty-Mraz90",
     user: {
       id: 10,
@@ -716,7 +714,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userUpdateUserForm } from "petstore/funcs/userUpdateUserForm.js";
+import { usersUpdateForm } from "petstore/funcs/usersUpdateForm.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -725,7 +723,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userUpdateUserForm(petstore, {
+  const res = await usersUpdateForm(petstore, {
     username: "Bo.Beatty-Mraz90",
     user: {
       id: 10,
@@ -770,7 +768,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## deleteUser
+## delete
 
 This can only be done by the logged in user.
 
@@ -784,7 +782,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  await petstore.user.deleteUser({
+  await petstore.users.delete({
     username: "Demetris_Schmitt",
   });
 
@@ -800,7 +798,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { userDeleteUser } from "petstore/funcs/userDeleteUser.js";
+import { usersDelete } from "petstore/funcs/usersDelete.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -809,7 +807,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await userDeleteUser(petstore, {
+  const res = await usersDelete(petstore, {
     username: "Demetris_Schmitt",
   });
 

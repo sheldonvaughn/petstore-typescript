@@ -4,6 +4,7 @@
 
 import * as z from "zod";
 import { PetstoreCore } from "../core.js";
+import { encodeBodyForm } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -21,7 +22,7 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
-export enum CreateUserRawAcceptEnum {
+export enum CreateFormAcceptEnum {
   applicationJson = "application/json",
   applicationXml = "application/xml",
 }
@@ -32,7 +33,7 @@ export enum CreateUserRawAcceptEnum {
  * @remarks
  * This can only be done by the logged in user.
  */
-export async function userCreateUserRaw(
+export async function usersCreateForm(
   client: PetstoreCore,
   request?:
     | ReadableStream<Uint8Array>
@@ -40,10 +41,10 @@ export async function userCreateUserRaw(
     | ArrayBuffer
     | Uint8Array
     | undefined,
-  options?: RequestOptions & { acceptHeaderOverride?: CreateUserRawAcceptEnum },
+  options?: RequestOptions & { acceptHeaderOverride?: CreateFormAcceptEnum },
 ): Promise<
   Result<
-    operations.CreateUserRawResponse,
+    operations.CreateUserFormResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -68,12 +69,15 @@ export async function userCreateUserRaw(
     return parsed;
   }
   const payload = parsed.value;
-  const body = payload === undefined ? null : payload;
+
+  const body = Object.entries(payload || {}).map(([k, v]) => {
+    return encodeBodyForm(k, v, { charEncoding: "percent" });
+  }).join("&");
 
   const path = pathToFunc("/user")();
 
   const headers = new Headers({
-    "Content-Type": "application/xml",
+    "Content-Type": "application/x-www-form-urlencoded",
     Accept: options?.acceptHeaderOverride
       || "application/json;q=1, application/xml;q=0",
   });
@@ -83,7 +87,7 @@ export async function userCreateUserRaw(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "createUser_raw",
+    operationID: "createUser_form",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -120,7 +124,7 @@ export async function userCreateUserRaw(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.CreateUserRawResponse,
+    operations.CreateUserFormResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -130,8 +134,8 @@ export async function userCreateUserRaw(
     | ConnectionError
   >(
     M.fail(["4XX", "5XX"]),
-    M.json("default", operations.CreateUserRawResponse$inboundSchema),
-    M.bytes("default", operations.CreateUserRawResponse$inboundSchema, {
+    M.json("default", operations.CreateUserFormResponse$inboundSchema),
+    M.bytes("default", operations.CreateUserFormResponse$inboundSchema, {
       ctype: "application/xml",
     }),
   )(response);

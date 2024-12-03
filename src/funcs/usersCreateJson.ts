@@ -4,7 +4,7 @@
 
 import * as z from "zod";
 import { PetstoreCore } from "../core.js";
-import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
+import { encodeJSON } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -22,16 +22,29 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
+export enum CreateJsonAcceptEnum {
+  applicationJson = "application/json",
+  applicationXml = "application/xml",
+}
+
 /**
- * Updates a pet in the store with form data
+ * Create user
+ *
+ * @remarks
+ * This can only be done by the logged in user.
  */
-export async function petUpdatePetWithForm(
+export async function usersCreateJson(
   client: PetstoreCore,
-  request: operations.UpdatePetWithFormRequest,
-  options?: RequestOptions,
+  request?:
+    | ReadableStream<Uint8Array>
+    | Blob
+    | ArrayBuffer
+    | Uint8Array
+    | undefined,
+  options?: RequestOptions & { acceptHeaderOverride?: CreateJsonAcceptEnum },
 ): Promise<
   Result<
-    void,
+    operations.CreateUserJsonResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -43,31 +56,29 @@ export async function petUpdatePetWithForm(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.UpdatePetWithFormRequest$outboundSchema.parse(value),
+    (value) =>
+      z.union([
+        z.instanceof(ReadableStream<Uint8Array>),
+        z.instanceof(Blob),
+        z.instanceof(ArrayBuffer),
+        z.instanceof(Uint8Array),
+      ]).optional().parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return parsed;
   }
   const payload = parsed.value;
-  const body = null;
+  const body = payload === undefined
+    ? null
+    : encodeJSON("body", payload, { explode: true });
 
-  const pathParams = {
-    petId: encodeSimple("petId", payload.petId, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-
-  const path = pathToFunc("/pet/{petId}")(pathParams);
-
-  const query = encodeFormQuery({
-    "name": payload.name,
-    "status": payload.status,
-  });
+  const path = pathToFunc("/user")();
 
   const headers = new Headers({
-    Accept: "*/*",
+    "Content-Type": "application/json",
+    Accept: options?.acceptHeaderOverride
+      || "application/json;q=1, application/xml;q=0",
   });
 
   const secConfig = await extractSecurity(client._options.petstoreAuth);
@@ -75,7 +86,7 @@ export async function petUpdatePetWithForm(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "updatePetWithForm",
+    operationID: "createUser_json",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -92,7 +103,6 @@ export async function petUpdatePetWithForm(
     method: "POST",
     path: path,
     headers: headers,
-    query: query,
     body: body,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
@@ -103,7 +113,7 @@ export async function petUpdatePetWithForm(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["405", "4XX", "5XX"],
+    errorCodes: ["4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -113,7 +123,7 @@ export async function petUpdatePetWithForm(
   const response = doResult.value;
 
   const [result] = await M.match<
-    void,
+    operations.CreateUserJsonResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -122,8 +132,11 @@ export async function petUpdatePetWithForm(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.fail([405, "4XX", "5XX"]),
-    M.nil("2XX", z.void()),
+    M.fail(["4XX", "5XX"]),
+    M.json("default", operations.CreateUserJsonResponse$inboundSchema),
+    M.bytes("default", operations.CreateUserJsonResponse$inboundSchema, {
+      ctype: "application/xml",
+    }),
   )(response);
   if (!result.ok) {
     return result;

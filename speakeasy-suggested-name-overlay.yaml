@@ -1,0 +1,124 @@
+overlay: 1.0.0
+info:
+  title: Speakeasy Suggestions - Swagger Petstore - OpenAPI 3.0
+  version: 0.0.1
+actions:
+  - target: $["paths"]["/pet/{petId}"]["delete"]
+    update:
+      x-speakeasy-group: pets
+      x-speakeasy-name-override: delete
+    x-speakeasy-metadata:
+      after: sdk.pets.delete()
+      before: sdk.pet.deletePet()
+      type: method-name
+  - target: $["paths"]["/user/{username}"]["put"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.users.update()
+      before: sdk.user.updateUser()
+      type: method-name
+  - target: $["paths"]["/user/{username}"]["delete"]
+    update:
+      x-speakeasy-name-override: delete
+      x-speakeasy-group: users
+    x-speakeasy-metadata:
+      after: sdk.users.delete()
+      before: sdk.user.deleteUser()
+      type: method-name
+  - target: $["paths"]["/pet/{petId}"]["get"]
+    update:
+      x-speakeasy-name-override: get
+      x-speakeasy-group: pets
+    x-speakeasy-metadata:
+      after: sdk.pets.get()
+      before: sdk.pet.getPetById()
+      type: method-name
+  - target: $["paths"]["/pet"]["put"]
+    update:
+      x-speakeasy-group: pets
+      x-speakeasy-name-override: update
+    x-speakeasy-metadata:
+      after: sdk.pets.update()
+      before: sdk.pet.updatePet()
+      type: method-name
+  - target: $["paths"]["/user/{username}"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: getByName
+    x-speakeasy-metadata:
+      after: sdk.users.getByName()
+      before: sdk.user.getUserByName()
+      type: method-name
+  - target: $["paths"]["/pet/{petId}"]["post"]
+    update:
+      x-speakeasy-group: pets
+      x-speakeasy-name-override: updateWithForm
+    x-speakeasy-metadata:
+      after: sdk.pets.updateWithForm()
+      before: sdk.pet.updatePetWithForm()
+      type: method-name
+  - target: $["paths"]["/user"]["post"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.users.create()
+      before: sdk.user.createUser()
+      type: method-name
+  - target: $["paths"]["/user/logout"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: logout
+    x-speakeasy-metadata:
+      after: sdk.users.logout()
+      before: sdk.user.logoutUser()
+      type: method-name
+  - target: $["paths"]["/pet/{petId}/uploadImage"]["post"]
+    update:
+      x-speakeasy-group: pets
+    x-speakeasy-metadata:
+      after: sdk.pets.uploadFile()
+      before: sdk.pet.uploadFile()
+      type: method-name
+  - target: $["paths"]["/user/login"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: login
+    x-speakeasy-metadata:
+      after: sdk.users.login()
+      before: sdk.user.loginUser()
+      type: method-name
+  - target: $["paths"]["/pet/findByTags"]["get"]
+    update:
+      x-speakeasy-name-override: findByTags
+      x-speakeasy-group: pets
+    x-speakeasy-metadata:
+      after: sdk.pets.findByTags()
+      before: sdk.pet.findPetsByTags()
+      type: method-name
+  - target: $["paths"]["/pet/findByStatus"]["get"]
+    update:
+      x-speakeasy-group: pets
+      x-speakeasy-name-override: findByStatus
+    x-speakeasy-metadata:
+      after: sdk.pets.findByStatus()
+      before: sdk.pet.findPetsByStatus()
+      type: method-name
+  - target: $["paths"]["/pet"]["post"]
+    update:
+      x-speakeasy-group: pets
+      x-speakeasy-name-override: add
+    x-speakeasy-metadata:
+      after: sdk.pets.add()
+      before: sdk.pet.addPet()
+      type: method-name
+  - target: $["paths"]["/user/createWithList"]["post"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: createWithList
+    x-speakeasy-metadata:
+      after: sdk.users.createWithList()
+      before: sdk.user.createUsersWithListInput()
+      type: method-name

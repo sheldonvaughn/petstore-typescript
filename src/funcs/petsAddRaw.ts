@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { PetstoreCore } from "../core.js";
-import { encodeBodyForm } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -22,31 +21,24 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
-export enum CreateUserFormAcceptEnum {
+export enum AddRawAcceptEnum {
   applicationJson = "application/json",
   applicationXml = "application/xml",
 }
 
 /**
- * Create user
+ * Add a new pet to the store
  *
  * @remarks
- * This can only be done by the logged in user.
+ * Add a new pet to the store
  */
-export async function userCreateUserForm(
+export async function petsAddRaw(
   client: PetstoreCore,
-  request?:
-    | ReadableStream<Uint8Array>
-    | Blob
-    | ArrayBuffer
-    | Uint8Array
-    | undefined,
-  options?: RequestOptions & {
-    acceptHeaderOverride?: CreateUserFormAcceptEnum;
-  },
+  request: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array,
+  options?: RequestOptions & { acceptHeaderOverride?: AddRawAcceptEnum },
 ): Promise<
   Result<
-    operations.CreateUserFormResponse,
+    operations.AddPetRawResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -64,22 +56,19 @@ export async function userCreateUserForm(
         z.instanceof(Blob),
         z.instanceof(ArrayBuffer),
         z.instanceof(Uint8Array),
-      ]).optional().parse(value),
+      ]).parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return parsed;
   }
   const payload = parsed.value;
+  const body = payload;
 
-  const body = Object.entries(payload || {}).map(([k, v]) => {
-    return encodeBodyForm(k, v, { charEncoding: "percent" });
-  }).join("&");
-
-  const path = pathToFunc("/user")();
+  const path = pathToFunc("/pet")();
 
   const headers = new Headers({
-    "Content-Type": "application/x-www-form-urlencoded",
+    "Content-Type": "application/xml",
     Accept: options?.acceptHeaderOverride
       || "application/json;q=1, application/xml;q=0",
   });
@@ -89,7 +78,7 @@ export async function userCreateUserForm(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "createUser_form",
+    operationID: "addPet_raw",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -116,7 +105,7 @@ export async function userCreateUserForm(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["405", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -126,7 +115,7 @@ export async function userCreateUserForm(
   const response = doResult.value;
 
   const [result] = await M.match<
-    operations.CreateUserFormResponse,
+    operations.AddPetRawResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -135,11 +124,11 @@ export async function userCreateUserForm(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.fail(["4XX", "5XX"]),
-    M.json("default", operations.CreateUserFormResponse$inboundSchema),
-    M.bytes("default", operations.CreateUserFormResponse$inboundSchema, {
+    M.bytes(200, operations.AddPetRawResponse$inboundSchema, {
       ctype: "application/xml",
     }),
+    M.json(200, operations.AddPetRawResponse$inboundSchema),
+    M.fail([405, "4XX", "5XX"]),
   )(response);
   if (!result.ok) {
     return result;

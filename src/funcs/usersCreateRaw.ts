@@ -4,7 +4,6 @@
 
 import * as z from "zod";
 import { PetstoreCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -22,19 +21,29 @@ import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
+export enum CreateRawAcceptEnum {
+  applicationJson = "application/json",
+  applicationXml = "application/xml",
+}
+
 /**
- * Update user
+ * Create user
  *
  * @remarks
  * This can only be done by the logged in user.
  */
-export async function userUpdateUserJson(
+export async function usersCreateRaw(
   client: PetstoreCore,
-  request: operations.UpdateUserJsonRequest,
-  options?: RequestOptions,
+  request?:
+    | ReadableStream<Uint8Array>
+    | Blob
+    | ArrayBuffer
+    | Uint8Array
+    | undefined,
+  options?: RequestOptions & { acceptHeaderOverride?: CreateRawAcceptEnum },
 ): Promise<
   Result<
-    void,
+    operations.CreateUserRawResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -46,27 +55,27 @@ export async function userUpdateUserJson(
 > {
   const parsed = safeParse(
     request,
-    (value) => operations.UpdateUserJsonRequest$outboundSchema.parse(value),
+    (value) =>
+      z.union([
+        z.instanceof(ReadableStream<Uint8Array>),
+        z.instanceof(Blob),
+        z.instanceof(ArrayBuffer),
+        z.instanceof(Uint8Array),
+      ]).optional().parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
     return parsed;
   }
   const payload = parsed.value;
-  const body = encodeJSON("body", payload.User, { explode: true });
+  const body = payload === undefined ? null : payload;
 
-  const pathParams = {
-    username: encodeSimple("username", payload.username, {
-      explode: false,
-      charEncoding: "percent",
-    }),
-  };
-
-  const path = pathToFunc("/user/{username}")(pathParams);
+  const path = pathToFunc("/user")();
 
   const headers = new Headers({
-    "Content-Type": "application/json",
-    Accept: "*/*",
+    "Content-Type": "application/xml",
+    Accept: options?.acceptHeaderOverride
+      || "application/json;q=1, application/xml;q=0",
   });
 
   const secConfig = await extractSecurity(client._options.petstoreAuth);
@@ -74,7 +83,7 @@ export async function userUpdateUserJson(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "updateUser_json",
+    operationID: "createUser_raw",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -88,7 +97,7 @@ export async function userUpdateUserJson(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "PUT",
+    method: "POST",
     path: path,
     headers: headers,
     body: body,
@@ -111,7 +120,7 @@ export async function userUpdateUserJson(
   const response = doResult.value;
 
   const [result] = await M.match<
-    void,
+    operations.CreateUserRawResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -121,7 +130,10 @@ export async function userUpdateUserJson(
     | ConnectionError
   >(
     M.fail(["4XX", "5XX"]),
-    M.nil("default", z.void()),
+    M.json("default", operations.CreateUserRawResponse$inboundSchema),
+    M.bytes("default", operations.CreateUserRawResponse$inboundSchema, {
+      ctype: "application/xml",
+    }),
   )(response);
   if (!result.ok) {
     return result;

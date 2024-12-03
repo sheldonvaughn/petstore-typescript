@@ -105,7 +105,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.updatePetJson(
+  const result = await petstore.pets.updateForm(
     await openAsBlob("example.file"),
   );
 
@@ -139,7 +139,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.updatePetJson(
+  const result = await petstore.pets.updateForm(
     await openAsBlob("example.file"),
   );
 
@@ -160,7 +160,7 @@ import { Petstore } from "petstore";
 const petstore = new Petstore();
 
 async function run() {
-  const result = await petstore.pet.getPetById({
+  const result = await petstore.pets.get({
     apiKey: process.env["PETSTORE_API_KEY"] ?? "",
   }, {
     petId: 504151,
@@ -181,20 +181,20 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [pet](docs/sdks/pet/README.md)
+### [pets](docs/sdks/pets/README.md)
 
-* [updatePetJson](docs/sdks/pet/README.md#updatepetjson) - Update an existing pet
-* [updatePetRaw](docs/sdks/pet/README.md#updatepetraw) - Update an existing pet
-* [updatePetForm](docs/sdks/pet/README.md#updatepetform) - Update an existing pet
-* [addPetJson](docs/sdks/pet/README.md#addpetjson) - Add a new pet to the store
-* [addPetRaw](docs/sdks/pet/README.md#addpetraw) - Add a new pet to the store
-* [addPetForm](docs/sdks/pet/README.md#addpetform) - Add a new pet to the store
-* [findPetsByStatus](docs/sdks/pet/README.md#findpetsbystatus) - Finds Pets by status
-* [findPetsByTags](docs/sdks/pet/README.md#findpetsbytags) - Finds Pets by tags
-* [getPetById](docs/sdks/pet/README.md#getpetbyid) - Find pet by ID
-* [updatePetWithForm](docs/sdks/pet/README.md#updatepetwithform) - Updates a pet in the store with form data
-* [deletePet](docs/sdks/pet/README.md#deletepet) - Deletes a pet
-* [uploadFile](docs/sdks/pet/README.md#uploadfile) - uploads an image
+* [updateForm](docs/sdks/pets/README.md#updateform) - Update an existing pet
+* [updateJson](docs/sdks/pets/README.md#updatejson) - Update an existing pet
+* [updateRaw](docs/sdks/pets/README.md#updateraw) - Update an existing pet
+* [addJson](docs/sdks/pets/README.md#addjson) - Add a new pet to the store
+* [addRaw](docs/sdks/pets/README.md#addraw) - Add a new pet to the store
+* [addForm](docs/sdks/pets/README.md#addform) - Add a new pet to the store
+* [findByStatus](docs/sdks/pets/README.md#findbystatus) - Finds Pets by status
+* [findByTags](docs/sdks/pets/README.md#findbytags) - Finds Pets by tags
+* [get](docs/sdks/pets/README.md#get) - Find pet by ID
+* [updateWithForm](docs/sdks/pets/README.md#updatewithform) - Updates a pet in the store with form data
+* [delete](docs/sdks/pets/README.md#delete) - Deletes a pet
+* [uploadFile](docs/sdks/pets/README.md#uploadfile) - uploads an image
 
 
 ### [store](docs/sdks/store/README.md)
@@ -206,19 +206,19 @@ run();
 * [getOrderById](docs/sdks/store/README.md#getorderbyid) - Find purchase order by ID
 * [deleteOrder](docs/sdks/store/README.md#deleteorder) - Delete purchase order by ID
 
-### [user](docs/sdks/user/README.md)
+### [users](docs/sdks/users/README.md)
 
-* [createUserJson](docs/sdks/user/README.md#createuserjson) - Create user
-* [createUserRaw](docs/sdks/user/README.md#createuserraw) - Create user
-* [createUserForm](docs/sdks/user/README.md#createuserform) - Create user
-* [createUsersWithListInput](docs/sdks/user/README.md#createuserswithlistinput) - Creates list of users with given input array
-* [loginUser](docs/sdks/user/README.md#loginuser) - Logs user into the system
-* [logoutUser](docs/sdks/user/README.md#logoutuser) - Logs out current logged in user session
-* [getUserByName](docs/sdks/user/README.md#getuserbyname) - Get user by user name
-* [updateUserJson](docs/sdks/user/README.md#updateuserjson) - Update user
-* [updateUserRaw](docs/sdks/user/README.md#updateuserraw) - Update user
-* [updateUserForm](docs/sdks/user/README.md#updateuserform) - Update user
-* [deleteUser](docs/sdks/user/README.md#deleteuser) - Delete user
+* [createJson](docs/sdks/users/README.md#createjson) - Create user
+* [createRaw](docs/sdks/users/README.md#createraw) - Create user
+* [createForm](docs/sdks/users/README.md#createform) - Create user
+* [createWithList](docs/sdks/users/README.md#createwithlist) - Creates list of users with given input array
+* [login](docs/sdks/users/README.md#login) - Logs user into the system
+* [logout](docs/sdks/users/README.md#logout) - Logs out current logged in user session
+* [getByName](docs/sdks/users/README.md#getbyname) - Get user by user name
+* [updateJson](docs/sdks/users/README.md#updatejson) - Update user
+* [updateRaw](docs/sdks/users/README.md#updateraw) - Update user
+* [updateForm](docs/sdks/users/README.md#updateform) - Update user
+* [delete](docs/sdks/users/README.md#delete) - Delete user
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -238,35 +238,35 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`petAddPetForm`](docs/sdks/pet/README.md#addpetform) - Add a new pet to the store
-- [`petAddPetJson`](docs/sdks/pet/README.md#addpetjson) - Add a new pet to the store
-- [`petAddPetRaw`](docs/sdks/pet/README.md#addpetraw) - Add a new pet to the store
-- [`petDeletePet`](docs/sdks/pet/README.md#deletepet) - Deletes a pet
-- [`petFindPetsByStatus`](docs/sdks/pet/README.md#findpetsbystatus) - Finds Pets by status
-- [`petFindPetsByTags`](docs/sdks/pet/README.md#findpetsbytags) - Finds Pets by tags
-- [`petGetPetById`](docs/sdks/pet/README.md#getpetbyid) - Find pet by ID
-- [`petUpdatePetForm`](docs/sdks/pet/README.md#updatepetform) - Update an existing pet
-- [`petUpdatePetJson`](docs/sdks/pet/README.md#updatepetjson) - Update an existing pet
-- [`petUpdatePetRaw`](docs/sdks/pet/README.md#updatepetraw) - Update an existing pet
-- [`petUpdatePetWithForm`](docs/sdks/pet/README.md#updatepetwithform) - Updates a pet in the store with form data
-- [`petUploadFile`](docs/sdks/pet/README.md#uploadfile) - uploads an image
+- [`petsAddForm`](docs/sdks/pets/README.md#addform) - Add a new pet to the store
+- [`petsAddJson`](docs/sdks/pets/README.md#addjson) - Add a new pet to the store
+- [`petsAddRaw`](docs/sdks/pets/README.md#addraw) - Add a new pet to the store
+- [`petsDelete`](docs/sdks/pets/README.md#delete) - Deletes a pet
+- [`petsFindByStatus`](docs/sdks/pets/README.md#findbystatus) - Finds Pets by status
+- [`petsFindByTags`](docs/sdks/pets/README.md#findbytags) - Finds Pets by tags
+- [`petsGet`](docs/sdks/pets/README.md#get) - Find pet by ID
+- [`petsUpdateForm`](docs/sdks/pets/README.md#updateform) - Update an existing pet
+- [`petsUpdateJson`](docs/sdks/pets/README.md#updatejson) - Update an existing pet
+- [`petsUpdateRaw`](docs/sdks/pets/README.md#updateraw) - Update an existing pet
+- [`petsUpdateWithForm`](docs/sdks/pets/README.md#updatewithform) - Updates a pet in the store with form data
+- [`petsUploadFile`](docs/sdks/pets/README.md#uploadfile) - uploads an image
 - [`storeDeleteOrder`](docs/sdks/store/README.md#deleteorder) - Delete purchase order by ID
 - [`storeGetInventory`](docs/sdks/store/README.md#getinventory) - Returns pet inventories by status
 - [`storeGetOrderById`](docs/sdks/store/README.md#getorderbyid) - Find purchase order by ID
 - [`storePlaceOrderForm`](docs/sdks/store/README.md#placeorderform) - Place an order for a pet
 - [`storePlaceOrderJson`](docs/sdks/store/README.md#placeorderjson) - Place an order for a pet
 - [`storePlaceOrderRaw`](docs/sdks/store/README.md#placeorderraw) - Place an order for a pet
-- [`userCreateUserForm`](docs/sdks/user/README.md#createuserform) - Create user
-- [`userCreateUserJson`](docs/sdks/user/README.md#createuserjson) - Create user
-- [`userCreateUserRaw`](docs/sdks/user/README.md#createuserraw) - Create user
-- [`userCreateUsersWithListInput`](docs/sdks/user/README.md#createuserswithlistinput) - Creates list of users with given input array
-- [`userDeleteUser`](docs/sdks/user/README.md#deleteuser) - Delete user
-- [`userGetUserByName`](docs/sdks/user/README.md#getuserbyname) - Get user by user name
-- [`userLoginUser`](docs/sdks/user/README.md#loginuser) - Logs user into the system
-- [`userLogoutUser`](docs/sdks/user/README.md#logoutuser) - Logs out current logged in user session
-- [`userUpdateUserForm`](docs/sdks/user/README.md#updateuserform) - Update user
-- [`userUpdateUserJson`](docs/sdks/user/README.md#updateuserjson) - Update user
-- [`userUpdateUserRaw`](docs/sdks/user/README.md#updateuserraw) - Update user
+- [`usersCreateForm`](docs/sdks/users/README.md#createform) - Create user
+- [`usersCreateJson`](docs/sdks/users/README.md#createjson) - Create user
+- [`usersCreateRaw`](docs/sdks/users/README.md#createraw) - Create user
+- [`usersCreateWithList`](docs/sdks/users/README.md#createwithlist) - Creates list of users with given input array
+- [`usersDelete`](docs/sdks/users/README.md#delete) - Delete user
+- [`usersGetByName`](docs/sdks/users/README.md#getbyname) - Get user by user name
+- [`usersLogin`](docs/sdks/users/README.md#login) - Logs user into the system
+- [`usersLogout`](docs/sdks/users/README.md#logout) - Logs out current logged in user session
+- [`usersUpdateForm`](docs/sdks/users/README.md#updateform) - Update user
+- [`usersUpdateJson`](docs/sdks/users/README.md#updatejson) - Update user
+- [`usersUpdateRaw`](docs/sdks/users/README.md#updateraw) - Update user
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
@@ -294,7 +294,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.updatePetJson(
+  const result = await petstore.pets.updateForm(
     await openAsBlob("example.file"),
   );
 
@@ -322,7 +322,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.updatePetJson(
+  const result = await petstore.pets.updateForm(
     await openAsBlob("example.file"),
     {
       retries: {
@@ -366,7 +366,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.updatePetJson(
+  const result = await petstore.pets.updateForm(
     await openAsBlob("example.file"),
   );
 
@@ -394,7 +394,7 @@ If a HTTP request fails, an operation my also throw an error from the `models/er
 | InvalidRequestError                                  | Any input used to create a request is invalid        |
 | UnexpectedClientError                                | Unrecognised or unexpected error                     |
 
-In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `updatePetJson` method may throw the following errors:
+In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `updateForm` method may throw the following errors:
 
 | Error Type      | Status Code | Content Type |
 | --------------- | ----------- | ------------ |
@@ -412,7 +412,7 @@ const petstore = new Petstore({
 async function run() {
   let result;
   try {
-    result = await petstore.pet.updatePetJson(await openAsBlob("example.file"));
+    result = await petstore.pets.updateForm(await openAsBlob("example.file"));
 
     // Handle the result
     console.log(result);
@@ -455,7 +455,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.updatePetJson(
+  const result = await petstore.pets.updateForm(
     await openAsBlob("example.file"),
   );
 

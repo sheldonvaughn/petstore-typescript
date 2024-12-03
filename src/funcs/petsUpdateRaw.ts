@@ -5,6 +5,7 @@
 import * as z from "zod";
 import { PetstoreCore } from "../core.js";
 import * as M from "../lib/matchers.js";
+import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -17,17 +18,27 @@ import {
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
+import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
 
+export enum UpdateRawAcceptEnum {
+  applicationJson = "application/json",
+  applicationXml = "application/xml",
+}
+
 /**
- * Logs out current logged in user session
+ * Update an existing pet
+ *
+ * @remarks
+ * Update an existing pet by Id
  */
-export async function userLogoutUser(
+export async function petsUpdateRaw(
   client: PetstoreCore,
-  options?: RequestOptions,
+  request: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array,
+  options?: RequestOptions & { acceptHeaderOverride?: UpdateRawAcceptEnum },
 ): Promise<
   Result<
-    void,
+    operations.UpdatePetRawResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -37,10 +48,29 @@ export async function userLogoutUser(
     | ConnectionError
   >
 > {
-  const path = pathToFunc("/user/logout")();
+  const parsed = safeParse(
+    request,
+    (value) =>
+      z.union([
+        z.instanceof(ReadableStream<Uint8Array>),
+        z.instanceof(Blob),
+        z.instanceof(ArrayBuffer),
+        z.instanceof(Uint8Array),
+      ]).parse(value),
+    "Input validation failed",
+  );
+  if (!parsed.ok) {
+    return parsed;
+  }
+  const payload = parsed.value;
+  const body = payload;
+
+  const path = pathToFunc("/pet")();
 
   const headers = new Headers({
-    Accept: "*/*",
+    "Content-Type": "application/xml",
+    Accept: options?.acceptHeaderOverride
+      || "application/json;q=1, application/xml;q=0",
   });
 
   const secConfig = await extractSecurity(client._options.petstoreAuth);
@@ -48,7 +78,7 @@ export async function userLogoutUser(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
-    operationID: "logoutUser",
+    operationID: "updatePet_raw",
     oAuth2Scopes: [],
 
     resolvedSecurity: requestSecurity,
@@ -62,9 +92,10 @@ export async function userLogoutUser(
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
-    method: "GET",
+    method: "PUT",
     path: path,
     headers: headers,
+    body: body,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -74,7 +105,7 @@ export async function userLogoutUser(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    errorCodes: ["400", "404", "405", "4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -84,7 +115,7 @@ export async function userLogoutUser(
   const response = doResult.value;
 
   const [result] = await M.match<
-    void,
+    operations.UpdatePetRawResponse,
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -93,8 +124,11 @@ export async function userLogoutUser(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.fail(["4XX", "5XX"]),
-    M.nil("default", z.void()),
+    M.bytes(200, operations.UpdatePetRawResponse$inboundSchema, {
+      ctype: "application/xml",
+    }),
+    M.json(200, operations.UpdatePetRawResponse$inboundSchema),
+    M.fail([400, 404, 405, "4XX", "5XX"]),
   )(response);
   if (!result.ok) {
     return result;

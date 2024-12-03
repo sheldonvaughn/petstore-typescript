@@ -21,7 +21,7 @@ specific category of applications.
 ```typescript
 import { openAsBlob } from "node:fs";
 import { PetstoreCore } from "petstore/core.js";
-import { petUpdatePetJson } from "petstore/funcs/petUpdatePetJson.js";
+import { petsUpdateForm } from "petstore/funcs/petsUpdateForm.js";
 import { SDKValidationError } from "petstore/models/errors/sdkvalidationerror.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
@@ -31,7 +31,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petUpdatePetJson(petstore, await openAsBlob("example.file"));
+  const res = await petsUpdateForm(petstore, await openAsBlob("example.file"));
 
   switch (true) {
     case res.ok:

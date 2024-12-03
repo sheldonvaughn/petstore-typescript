@@ -1,29 +1,24 @@
-# Pet
-(*pet*)
+# Pets
+(*pets*)
 
 ## Overview
 
-Everything about your Pets
-
-Find out more
-<http://swagger.io>
-
 ### Available Operations
 
-* [updatePetJson](#updatepetjson) - Update an existing pet
-* [updatePetRaw](#updatepetraw) - Update an existing pet
-* [updatePetForm](#updatepetform) - Update an existing pet
-* [addPetJson](#addpetjson) - Add a new pet to the store
-* [addPetRaw](#addpetraw) - Add a new pet to the store
-* [addPetForm](#addpetform) - Add a new pet to the store
-* [findPetsByStatus](#findpetsbystatus) - Finds Pets by status
-* [findPetsByTags](#findpetsbytags) - Finds Pets by tags
-* [getPetById](#getpetbyid) - Find pet by ID
-* [updatePetWithForm](#updatepetwithform) - Updates a pet in the store with form data
-* [deletePet](#deletepet) - Deletes a pet
+* [updateForm](#updateform) - Update an existing pet
+* [updateJson](#updatejson) - Update an existing pet
+* [updateRaw](#updateraw) - Update an existing pet
+* [addJson](#addjson) - Add a new pet to the store
+* [addRaw](#addraw) - Add a new pet to the store
+* [addForm](#addform) - Add a new pet to the store
+* [findByStatus](#findbystatus) - Finds Pets by status
+* [findByTags](#findbytags) - Finds Pets by tags
+* [get](#get) - Find pet by ID
+* [updateWithForm](#updatewithform) - Updates a pet in the store with form data
+* [delete](#delete) - Deletes a pet
 * [uploadFile](#uploadfile) - uploads an image
 
-## updatePetJson
+## updateForm
 
 Update an existing pet by Id
 
@@ -38,7 +33,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.updatePetJson(await openAsBlob("example.file"));
+  const result = await petstore.pets.updateForm(await openAsBlob("example.file"));
 
   // Handle the result
   console.log(result);
@@ -54,7 +49,7 @@ The standalone function version of this method:
 ```typescript
 import { openAsBlob } from "node:fs";
 import { PetstoreCore } from "petstore/core.js";
-import { petUpdatePetJson } from "petstore/funcs/petUpdatePetJson.js";
+import { petsUpdateForm } from "petstore/funcs/petsUpdateForm.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -63,155 +58,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petUpdatePetJson(petstore, await openAsBlob("example.file"));
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [ReadableStream<Uint8Array>](../../models/components/pet.md)                                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.UpdatePetJsonResponse](../../models/operations/updatepetjsonresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## updatePetRaw
-
-Update an existing pet by Id
-
-### Example Usage
-
-```typescript
-import { openAsBlob } from "node:fs";
-import { Petstore } from "petstore";
-
-const petstore = new Petstore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await petstore.pet.updatePetRaw(await openAsBlob("example.file"));
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { openAsBlob } from "node:fs";
-import { PetstoreCore } from "petstore/core.js";
-import { petUpdatePetRaw } from "petstore/funcs/petUpdatePetRaw.js";
-
-// Use `PetstoreCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const petstore = new PetstoreCore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await petUpdatePetRaw(petstore, await openAsBlob("example.file"));
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [ReadableStream<Uint8Array>](../../models/components/pet.md)                                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.UpdatePetRawResponse](../../models/operations/updatepetrawresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
-
-## updatePetForm
-
-Update an existing pet by Id
-
-### Example Usage
-
-```typescript
-import { openAsBlob } from "node:fs";
-import { Petstore } from "petstore";
-
-const petstore = new Petstore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await petstore.pet.updatePetForm(await openAsBlob("example.file"));
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { openAsBlob } from "node:fs";
-import { PetstoreCore } from "petstore/core.js";
-import { petUpdatePetForm } from "petstore/funcs/petUpdatePetForm.js";
-
-// Use `PetstoreCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const petstore = new PetstoreCore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await petUpdatePetForm(petstore, await openAsBlob("example.file"));
+  const res = await petsUpdateForm(petstore, await openAsBlob("example.file"));
 
   if (!res.ok) {
     throw res.error;
@@ -245,7 +92,155 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## addPetJson
+## updateJson
+
+Update an existing pet by Id
+
+### Example Usage
+
+```typescript
+import { openAsBlob } from "node:fs";
+import { Petstore } from "petstore";
+
+const petstore = new Petstore({
+  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await petstore.pets.updateJson(await openAsBlob("example.file"));
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { openAsBlob } from "node:fs";
+import { PetstoreCore } from "petstore/core.js";
+import { petsUpdateJson } from "petstore/funcs/petsUpdateJson.js";
+
+// Use `PetstoreCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const petstore = new PetstoreCore({
+  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await petsUpdateJson(petstore, await openAsBlob("example.file"));
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [ReadableStream<Uint8Array>](../../models/components/pet.md)                                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.UpdatePetJsonResponse](../../models/operations/updatepetjsonresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## updateRaw
+
+Update an existing pet by Id
+
+### Example Usage
+
+```typescript
+import { openAsBlob } from "node:fs";
+import { Petstore } from "petstore";
+
+const petstore = new Petstore({
+  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await petstore.pets.updateRaw(await openAsBlob("example.file"));
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { openAsBlob } from "node:fs";
+import { PetstoreCore } from "petstore/core.js";
+import { petsUpdateRaw } from "petstore/funcs/petsUpdateRaw.js";
+
+// Use `PetstoreCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const petstore = new PetstoreCore({
+  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await petsUpdateRaw(petstore, await openAsBlob("example.file"));
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [ReadableStream<Uint8Array>](../../models/components/pet.md)                                                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.UpdatePetRawResponse](../../models/operations/updatepetrawresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.APIError | 4XX, 5XX        | \*/\*           |
+
+## addJson
 
 Add a new pet to the store
 
@@ -259,7 +254,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.addPetJson(bytesToStream(new TextEncoder().encode("0xBfCAfA13bD")));
+  const result = await petstore.pets.addJson(bytesToStream(new TextEncoder().encode("0xBEAEbCcAA4")));
 
   // Handle the result
   console.log(result);
@@ -274,7 +269,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { petAddPetJson } from "petstore/funcs/petAddPetJson.js";
+import { petsAddJson } from "petstore/funcs/petsAddJson.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -283,7 +278,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petAddPetJson(petstore, bytesToStream(new TextEncoder().encode("0xbFb34B7FF3")));
+  const res = await petsAddJson(petstore, bytesToStream(new TextEncoder().encode("0x3eC95a0afE")));
 
   if (!res.ok) {
     throw res.error;
@@ -317,7 +312,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## addPetRaw
+## addRaw
 
 Add a new pet to the store
 
@@ -331,7 +326,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.addPetRaw(bytesToStream(new TextEncoder().encode("0xc58Cd683A3")));
+  const result = await petstore.pets.addRaw(bytesToStream(new TextEncoder().encode("0x9Bcde4dcEA")));
 
   // Handle the result
   console.log(result);
@@ -346,7 +341,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { petAddPetRaw } from "petstore/funcs/petAddPetRaw.js";
+import { petsAddRaw } from "petstore/funcs/petsAddRaw.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -355,7 +350,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petAddPetRaw(petstore, bytesToStream(new TextEncoder().encode("0x1A025d8ca9")));
+  const res = await petsAddRaw(petstore, bytesToStream(new TextEncoder().encode("0xE27ec5de5c")));
 
   if (!res.ok) {
     throw res.error;
@@ -389,7 +384,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## addPetForm
+## addForm
 
 Add a new pet to the store
 
@@ -403,7 +398,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.addPetForm({
+  const result = await petstore.pets.addForm({
     id: 10,
     name: "doggie",
     category: {
@@ -428,7 +423,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { petAddPetForm } from "petstore/funcs/petAddPetForm.js";
+import { petsAddForm } from "petstore/funcs/petsAddForm.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -437,7 +432,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petAddPetForm(petstore, {
+  const res = await petsAddForm(petstore, {
     id: 10,
     name: "doggie",
     category: {
@@ -481,7 +476,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## findPetsByStatus
+## findByStatus
 
 Multiple status values can be provided with comma separated strings
 
@@ -495,7 +490,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.findPetsByStatus({});
+  const result = await petstore.pets.findByStatus({});
 
   // Handle the result
   console.log(result);
@@ -510,7 +505,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { petFindPetsByStatus } from "petstore/funcs/petFindPetsByStatus.js";
+import { petsFindByStatus } from "petstore/funcs/petsFindByStatus.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -519,7 +514,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petFindPetsByStatus(petstore, {});
+  const res = await petsFindByStatus(petstore, {});
 
   if (!res.ok) {
     throw res.error;
@@ -553,7 +548,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## findPetsByTags
+## findByTags
 
 Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
 
@@ -567,7 +562,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.findPetsByTags({});
+  const result = await petstore.pets.findByTags({});
 
   // Handle the result
   console.log(result);
@@ -582,7 +577,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { petFindPetsByTags } from "petstore/funcs/petFindPetsByTags.js";
+import { petsFindByTags } from "petstore/funcs/petsFindByTags.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -591,7 +586,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petFindPetsByTags(petstore, {});
+  const res = await petsFindByTags(petstore, {});
 
   if (!res.ok) {
     throw res.error;
@@ -625,7 +620,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## getPetById
+## get
 
 Returns a single pet
 
@@ -637,7 +632,7 @@ import { Petstore } from "petstore";
 const petstore = new Petstore();
 
 async function run() {
-  const result = await petstore.pet.getPetById({
+  const result = await petstore.pets.get({
     apiKey: process.env["PETSTORE_API_KEY"] ?? "",
   }, {
     petId: 504151,
@@ -656,14 +651,14 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { petGetPetById } from "petstore/funcs/petGetPetById.js";
+import { petsGet } from "petstore/funcs/petsGet.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const petstore = new PetstoreCore();
 
 async function run() {
-  const res = await petGetPetById(petstore, {
+  const res = await petsGet(petstore, {
     apiKey: process.env["PETSTORE_API_KEY"] ?? "",
   }, {
     petId: 504151,
@@ -702,7 +697,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## updatePetWithForm
+## updateWithForm
 
 Updates a pet in the store with form data
 
@@ -716,7 +711,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  await petstore.pet.updatePetWithForm({
+  await petstore.pets.updateWithForm({
     petId: 303241,
   });
 
@@ -732,7 +727,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { petUpdatePetWithForm } from "petstore/funcs/petUpdatePetWithForm.js";
+import { petsUpdateWithForm } from "petstore/funcs/petsUpdateWithForm.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -741,7 +736,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petUpdatePetWithForm(petstore, {
+  const res = await petsUpdateWithForm(petstore, {
     petId: 303241,
   });
 
@@ -776,7 +771,7 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.APIError | 4XX, 5XX        | \*/\*           |
 
-## deletePet
+## delete
 
 Deletes a pet
 
@@ -790,7 +785,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  await petstore.pet.deletePet({
+  await petstore.pets.delete({
     petId: 441876,
   });
 
@@ -806,7 +801,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { petDeletePet } from "petstore/funcs/petDeletePet.js";
+import { petsDelete } from "petstore/funcs/petsDelete.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -815,7 +810,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petDeletePet(petstore, {
+  const res = await petsDelete(petstore, {
     petId: 441876,
   });
 
@@ -864,7 +859,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pet.uploadFile({
+  const result = await petstore.pets.uploadFile({
     petId: 565380,
   });
 
@@ -881,7 +876,7 @@ The standalone function version of this method:
 
 ```typescript
 import { PetstoreCore } from "petstore/core.js";
-import { petUploadFile } from "petstore/funcs/petUploadFile.js";
+import { petsUploadFile } from "petstore/funcs/petsUploadFile.js";
 
 // Use `PetstoreCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -890,7 +885,7 @@ const petstore = new PetstoreCore({
 });
 
 async function run() {
-  const res = await petUploadFile(petstore, {
+  const res = await petsUploadFile(petstore, {
     petId: 565380,
   });
 
