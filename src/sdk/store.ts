@@ -42,6 +42,28 @@ export class Store extends ClientSDK {
    * @remarks
    * Place a new order in the store
    */
+  async placeOrderJson(
+    request?:
+      | ReadableStream<Uint8Array>
+      | Blob
+      | ArrayBuffer
+      | Uint8Array
+      | undefined,
+    options?: RequestOptions,
+  ): Promise<components.Order1> {
+    return unwrapAsync(storePlaceOrderJson(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Place an order for a pet
+   *
+   * @remarks
+   * Place a new order in the store
+   */
   async placeOrderRaw(
     request?:
       | ReadableStream<Uint8Array>
@@ -69,28 +91,6 @@ export class Store extends ClientSDK {
     options?: RequestOptions,
   ): Promise<components.Order1> {
     return unwrapAsync(storePlaceOrderForm(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Place an order for a pet
-   *
-   * @remarks
-   * Place a new order in the store
-   */
-  async placeOrderJson(
-    request?:
-      | ReadableStream<Uint8Array>
-      | Blob
-      | ArrayBuffer
-      | Uint8Array
-      | undefined,
-    options?: RequestOptions,
-  ): Promise<components.Order1> {
-    return unwrapAsync(storePlaceOrderJson(
       this,
       request,
       options,

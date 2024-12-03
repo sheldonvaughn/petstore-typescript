@@ -186,23 +186,6 @@ export class User extends ClientSDK {
    * @remarks
    * This can only be done by the logged in user.
    */
-  async updateUserForm(
-    request: operations.UpdateUserFormRequest,
-    options?: RequestOptions,
-  ): Promise<void> {
-    return unwrapAsync(userUpdateUserForm(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Update user
-   *
-   * @remarks
-   * This can only be done by the logged in user.
-   */
   async updateUserJson(
     request: operations.UpdateUserJsonRequest,
     options?: RequestOptions,
@@ -225,6 +208,23 @@ export class User extends ClientSDK {
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(userUpdateUserRaw(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update user
+   *
+   * @remarks
+   * This can only be done by the logged in user.
+   */
+  async updateUserForm(
+    request: operations.UpdateUserFormRequest,
+    options?: RequestOptions,
+  ): Promise<void> {
+    return unwrapAsync(userUpdateUserForm(
       this,
       request,
       options,

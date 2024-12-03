@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     Swagger Petstore - OpenAPI 3.0:
         inputs:
-            - location: ../../Documents/petstore.json
+            - location: ./petstore.json
         registry:
             location: registry.speakeasyapi.dev/sheldon-vaughn-test/sandbox/swagger-petstore---open-api-3-0
 targets:

@@ -48,6 +48,7 @@ For more information about the API: [Find out more about Swagger](http://swagger
 * [Development](#development)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
+* [petstore-typescript](#petstore-typescript)
 
 <!-- End Table of Contents [toc] -->
 
@@ -59,25 +60,25 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add https://github.com/sheldonvaughn/petstore-typescript
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add https://github.com/sheldonvaughn/petstore-typescript
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add https://github.com/sheldonvaughn/petstore-typescript
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET> zod
+yarn add https://github.com/sheldonvaughn/petstore-typescript zod
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -199,9 +200,9 @@ run();
 ### [store](docs/sdks/store/README.md)
 
 * [getInventory](docs/sdks/store/README.md#getinventory) - Returns pet inventories by status
+* [placeOrderJson](docs/sdks/store/README.md#placeorderjson) - Place an order for a pet
 * [placeOrderRaw](docs/sdks/store/README.md#placeorderraw) - Place an order for a pet
 * [placeOrderForm](docs/sdks/store/README.md#placeorderform) - Place an order for a pet
-* [placeOrderJson](docs/sdks/store/README.md#placeorderjson) - Place an order for a pet
 * [getOrderById](docs/sdks/store/README.md#getorderbyid) - Find purchase order by ID
 * [deleteOrder](docs/sdks/store/README.md#deleteorder) - Delete purchase order by ID
 
@@ -214,9 +215,9 @@ run();
 * [loginUser](docs/sdks/user/README.md#loginuser) - Logs user into the system
 * [logoutUser](docs/sdks/user/README.md#logoutuser) - Logs out current logged in user session
 * [getUserByName](docs/sdks/user/README.md#getuserbyname) - Get user by user name
-* [updateUserForm](docs/sdks/user/README.md#updateuserform) - Update user
 * [updateUserJson](docs/sdks/user/README.md#updateuserjson) - Update user
 * [updateUserRaw](docs/sdks/user/README.md#updateuserraw) - Update user
+* [updateUserForm](docs/sdks/user/README.md#updateuserform) - Update user
 * [deleteUser](docs/sdks/user/README.md#deleteuser) - Delete user
 
 </details>
