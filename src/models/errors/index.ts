@@ -3,5 +3,11 @@
  */
 
 export * from "./apierror.js";
+export * from "./badrequest.js";
 export * from "./httpclienterrors.js";
+export * from "./internalservererror.js";
+export * from "./notfound.js";
+export * from "./ratelimited.js";
 export * from "./sdkvalidationerror.js";
+export * from "./timeout.js";
+export * from "./unauthorized.js";

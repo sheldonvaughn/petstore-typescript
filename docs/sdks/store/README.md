@@ -85,9 +85,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## placeOrderJson
 
@@ -157,9 +163,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## placeOrderRaw
 
@@ -229,9 +241,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## placeOrderForm
 
@@ -311,9 +329,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## getOrderById
 
@@ -387,9 +411,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
+| errors.Timeout               | 408, 504                     | application/json             |
+| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
+| errors.RateLimited           | 429                          | application/json             |
+| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
+| errors.NotFound              | 501, 505                     | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
 ## deleteOrder
 
@@ -461,6 +491,12 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
+| errors.Timeout               | 408, 504                     | application/json             |
+| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
+| errors.RateLimited           | 429                          | application/json             |
+| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
+| errors.NotFound              | 501, 505                     | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |

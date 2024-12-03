@@ -6,6 +6,7 @@ sources:
             - location: ./petstore.json
         overlays:
             - location: ./speakeasy-suggested-name-overlay.yaml
+            - location: ./speakeasy-suggested-errors.yaml
         registry:
             location: registry.speakeasyapi.dev/sheldon-vaughn-test/sandbox/swagger-petstore---open-api-3-0
 targets:

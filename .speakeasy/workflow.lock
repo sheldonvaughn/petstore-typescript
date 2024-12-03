@@ -1,9 +1,9 @@
-speakeasyVersion: 1.449.0
+speakeasyVersion: 1.450.0
 sources:
     Swagger Petstore - OpenAPI 3.0:
         sourceNamespace: swagger-petstore---open-api-3-0
-        sourceRevisionDigest: sha256:6965bff47ad04c43bbb16d9f9e0a214a554a5b8c47e9096845045974f8bf0654
-        sourceBlobDigest: sha256:9d5c8e9fefab2ea69a59ce017b97f772e2a4b1334dd85267b570b4c855ab5c89
+        sourceRevisionDigest: sha256:5e9acfe607c7c2c8ca5ae2ac711b6b1ddb7254c57e4bbd3b2b1e5f7a1cdd1d1f
+        sourceBlobDigest: sha256:f3029af854a4571450d0f996a041c45a01aef89ec0614f592f6354ae68aa2d9c
         tags:
             - latest
             - 1.0.19
@@ -11,10 +11,10 @@ targets:
     petstore:
         source: Swagger Petstore - OpenAPI 3.0
         sourceNamespace: swagger-petstore---open-api-3-0
-        sourceRevisionDigest: sha256:6965bff47ad04c43bbb16d9f9e0a214a554a5b8c47e9096845045974f8bf0654
-        sourceBlobDigest: sha256:9d5c8e9fefab2ea69a59ce017b97f772e2a4b1334dd85267b570b4c855ab5c89
+        sourceRevisionDigest: sha256:5e9acfe607c7c2c8ca5ae2ac711b6b1ddb7254c57e4bbd3b2b1e5f7a1cdd1d1f
+        sourceBlobDigest: sha256:f3029af854a4571450d0f996a041c45a01aef89ec0614f592f6354ae68aa2d9c
         codeSamplesNamespace: swagger-petstore---open-api-3-0-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:3a8c522b09f2fa2f1b33643077871fc2194f0db1c1c62998a6beccd8bcb30721
+        codeSamplesRevisionDigest: sha256:1a43ab0d6f2cdfac1aba384f506ef93770c7aa56b9f0b785df715960b13bde66
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -24,6 +24,7 @@ workflow:
                 - location: ./petstore.json
             overlays:
                 - location: ./speakeasy-suggested-name-overlay.yaml
+                - location: ./speakeasy-suggested-errors.yaml
             registry:
                 location: registry.speakeasyapi.dev/sheldon-vaughn-test/sandbox/swagger-petstore---open-api-3-0
     targets:

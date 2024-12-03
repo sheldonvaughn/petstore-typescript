@@ -31,11 +31,11 @@ import * as components from "../models/components/index.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
 
-export { UpdateFormAcceptEnum } from "../funcs/petsUpdateForm.js";
-
 export { UpdateJsonAcceptEnum } from "../funcs/petsUpdateJson.js";
 
 export { UpdateRawAcceptEnum } from "../funcs/petsUpdateRaw.js";
+
+export { UpdateFormAcceptEnum } from "../funcs/petsUpdateForm.js";
 
 export { AddJsonAcceptEnum } from "../funcs/petsAddJson.js";
 
@@ -50,23 +50,6 @@ export { FindByTagsAcceptEnum } from "../funcs/petsFindByTags.js";
 export { GetAcceptEnum } from "../funcs/petsGet.js";
 
 export class Pets extends ClientSDK {
-  /**
-   * Update an existing pet
-   *
-   * @remarks
-   * Update an existing pet by Id
-   */
-  async updateForm(
-    request: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array,
-    options?: RequestOptions & { acceptHeaderOverride?: UpdateFormAcceptEnum },
-  ): Promise<operations.UpdatePetFormResponse> {
-    return unwrapAsync(petsUpdateForm(
-      this,
-      request,
-      options,
-    ));
-  }
-
   /**
    * Update an existing pet
    *
@@ -95,6 +78,23 @@ export class Pets extends ClientSDK {
     options?: RequestOptions & { acceptHeaderOverride?: UpdateRawAcceptEnum },
   ): Promise<operations.UpdatePetRawResponse> {
     return unwrapAsync(petsUpdateRaw(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Update an existing pet
+   *
+   * @remarks
+   * Update an existing pet by Id
+   */
+  async updateForm(
+    request: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array,
+    options?: RequestOptions & { acceptHeaderOverride?: UpdateFormAcceptEnum },
+  ): Promise<operations.UpdatePetFormResponse> {
+    return unwrapAsync(petsUpdateForm(
       this,
       request,
       options,

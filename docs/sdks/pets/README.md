@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [updateForm](#updateform) - Update an existing pet
 * [updateJson](#updatejson) - Update an existing pet
 * [updateRaw](#updateraw) - Update an existing pet
+* [updateForm](#updateform) - Update an existing pet
 * [addJson](#addjson) - Add a new pet to the store
 * [addRaw](#addraw) - Add a new pet to the store
 * [addForm](#addform) - Add a new pet to the store
@@ -17,80 +17,6 @@
 * [updateWithForm](#updatewithform) - Updates a pet in the store with form data
 * [delete](#delete) - Deletes a pet
 * [uploadFile](#uploadfile) - uploads an image
-
-## updateForm
-
-Update an existing pet by Id
-
-### Example Usage
-
-```typescript
-import { openAsBlob } from "node:fs";
-import { Petstore } from "petstore";
-
-const petstore = new Petstore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await petstore.pets.updateForm(await openAsBlob("example.file"));
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { openAsBlob } from "node:fs";
-import { PetstoreCore } from "petstore/core.js";
-import { petsUpdateForm } from "petstore/funcs/petsUpdateForm.js";
-
-// Use `PetstoreCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const petstore = new PetstoreCore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await petsUpdateForm(petstore, await openAsBlob("example.file"));
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [ReadableStream<Uint8Array>](../../models/components/pet1.md)                                                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.UpdatePetFormResponse](../../models/operations/updatepetformresponse.md)\>**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
 
 ## updateJson
 
@@ -162,9 +88,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
+| errors.Timeout               | 408, 504                     | application/json             |
+| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
+| errors.RateLimited           | 429                          | application/json             |
+| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
+| errors.NotFound              | 501, 505                     | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
 ## updateRaw
 
@@ -236,9 +168,95 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
+| errors.Timeout               | 408, 504                     | application/json             |
+| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
+| errors.RateLimited           | 429                          | application/json             |
+| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
+| errors.NotFound              | 501, 505                     | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
+
+## updateForm
+
+Update an existing pet by Id
+
+### Example Usage
+
+```typescript
+import { openAsBlob } from "node:fs";
+import { Petstore } from "petstore";
+
+const petstore = new Petstore({
+  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await petstore.pets.updateForm(await openAsBlob("example.file"));
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { openAsBlob } from "node:fs";
+import { PetstoreCore } from "petstore/core.js";
+import { petsUpdateForm } from "petstore/funcs/petsUpdateForm.js";
+
+// Use `PetstoreCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const petstore = new PetstoreCore({
+  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await petsUpdateForm(petstore, await openAsBlob("example.file"));
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [ReadableStream<Uint8Array>](../../models/components/pet1.md)                                                                                                                  | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.UpdatePetFormResponse](../../models/operations/updatepetformresponse.md)\>**
+
+### Errors
+
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
+| errors.Timeout               | 408, 504                     | application/json             |
+| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
+| errors.RateLimited           | 429                          | application/json             |
+| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
+| errors.NotFound              | 501, 505                     | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
 ## addJson
 
@@ -308,9 +326,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## addRaw
 
@@ -380,9 +404,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## addForm
 
@@ -472,9 +502,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## findByStatus
 
@@ -544,9 +580,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
+| errors.NotFound              | 404, 501, 505                | application/json             |
+| errors.Timeout               | 408, 504                     | application/json             |
+| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
+| errors.RateLimited           | 429                          | application/json             |
+| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
 ## findByTags
 
@@ -616,9 +658,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
+| errors.NotFound              | 404, 501, 505                | application/json             |
+| errors.Timeout               | 408, 504                     | application/json             |
+| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
+| errors.RateLimited           | 429                          | application/json             |
+| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
 ## get
 
@@ -693,9 +741,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
+| errors.Timeout               | 408, 504                     | application/json             |
+| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
+| errors.RateLimited           | 429                          | application/json             |
+| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
+| errors.NotFound              | 501, 505                     | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
 ## updateWithForm
 
@@ -767,9 +821,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
 
 ## delete
 
@@ -841,9 +901,15 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                   | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
+| errors.NotFound              | 404, 501, 505                | application/json             |
+| errors.Timeout               | 408, 504                     | application/json             |
+| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
+| errors.RateLimited           | 429                          | application/json             |
+| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
+| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
 ## uploadFile
 
@@ -917,6 +983,12 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |

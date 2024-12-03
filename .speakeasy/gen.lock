@@ -1,17 +1,18 @@
 lockVersion: 2.0.0
 id: 6001198f-1296-495e-92b0-9e0dfa3802c0
 management:
-  docChecksum: 708740b1e387b579cbfb30e573e59123
+  docChecksum: 28507ff35a34cf4c28a4240816d9b070
   docVersion: 1.0.19
-  speakeasyVersion: 1.449.0
+  speakeasyVersion: 1.450.0
   generationVersion: 2.467.4
-  releaseVersion: 0.1.0
-  configChecksum: e6cadf24b63f60ce9782364300d9ce6b
+  releaseVersion: 0.2.0
+  configChecksum: 467516053160d3398cc082e13b73ff0b
   installationURL: https://github.com/sheldonvaughn/petstore-typescript
 features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
+    additionalProperties: 0.1.1
     constsAndDefaults: 0.1.11
     core: 3.18.7
     defaultEnabledRetries: 0.1.0
@@ -50,6 +51,12 @@ generatedFiles:
   - docs/models/components/status.md
   - docs/models/components/tag.md
   - docs/models/components/user2.md
+  - docs/models/errors/badrequest.md
+  - docs/models/errors/internalservererror.md
+  - docs/models/errors/notfound.md
+  - docs/models/errors/ratelimited.md
+  - docs/models/errors/timeout.md
+  - docs/models/errors/unauthorized.md
   - docs/models/operations/addpetformresponse.md
   - docs/models/operations/addpetjsonresponse.md
   - docs/models/operations/addpetrawresponse.md
@@ -149,9 +156,15 @@ generatedFiles:
   - src/models/components/tag.ts
   - src/models/components/user2.ts
   - src/models/errors/apierror.ts
+  - src/models/errors/badrequest.ts
   - src/models/errors/httpclienterrors.ts
   - src/models/errors/index.ts
+  - src/models/errors/internalservererror.ts
+  - src/models/errors/notfound.ts
+  - src/models/errors/ratelimited.ts
   - src/models/errors/sdkvalidationerror.ts
+  - src/models/errors/timeout.ts
+  - src/models/errors/unauthorized.ts
   - src/models/operations/addpetform.ts
   - src/models/operations/addpetjson.ts
   - src/models/operations/addpetraw.ts
@@ -198,25 +211,77 @@ examples:
       responses:
         "200":
           application/xml: "0x6a842783ea"
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "408": {}
+        "413": {}
+        "429":
+          application/json: {"key": "<value>"}
+        "500": {}
+        "501":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
     speakeasy-default-update-pet-raw:
       responses:
         "200":
           application/xml: "0x6C7D6C5f13"
+        "401":
+          application/json: {"key": "<value>"}
+        "408":
+          application/json: {"key": "<value>"}
+        "413": {}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "500":
+          application/json: {"key": "<value>"}
+        "501":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
     speakeasy-default-update-pet-form:
       responses:
         "200":
           application/xml: "0xf8BEcfd4dD"
+        "401":
+          application/json: {"key": "<value>"}
+        "408": {}
+        "413": {}
+        "429": {}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "501":
+          application/json: {"key": "<value>"}
   addPet:
     speakeasy-default-add-pet-json:
       responses:
         "200":
           application/xml: "0xBfCAfA13bD"
           application/json: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": []}
+        "400":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
     speakeasy-default-add-pet-raw:
       responses:
         "200":
           application/xml: "0xc58Cd683A3"
           application/json: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>", "<value>"]}
+        "400":
+          application/json: {"key": "<value>"}
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500": {}
     speakeasy-default-add-pet-form:
       requestBody:
         application/x-www-form-urlencoded: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": []}
@@ -224,18 +289,47 @@ examples:
         "200":
           application/xml: "0xDc4d65Fa0E"
           application/json: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>"]}
+        "400":
+          application/json: {"key": "<value>"}
+        "401": {}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "408": {}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500": {}
   findPetsByStatus:
     speakeasy-default-find-pets-by-status:
       responses:
         "200":
           application/xml: "0xB072B0a632"
           application/json: []
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "404":
+          application/json: {"key": "<value>"}
+        "408": {}
+        "413":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500": {}
   findPetsByTags:
     speakeasy-default-find-pets-by-tags:
       responses:
         "200":
           application/xml: "0x6CfbAC3e8b"
           application/json: [{"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>"]}, {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>", "<value>", "<value>"]}, {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>", "<value>", "<value>"]}]
+        "401":
+          application/json: {"key": "<value>"}
+        "404": {}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "413": {}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
   getPetById:
     speakeasy-default-get-pet-by-id:
       parameters:
@@ -245,44 +339,135 @@ examples:
         "200":
           application/xml: "0x0b23Cfd42B"
           application/json: {"id": 10, "name": "doggie", "category": {"id": 1, "name": "Dogs"}, "photoUrls": ["<value>", "<value>", "<value>"]}
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "413":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "501":
+          application/json: {"key": "<value>"}
   updatePetWithForm:
     speakeasy-default-update-pet-with-form:
       parameters:
         path:
           petId: 303241
         query: {}
+      responses:
+        "400":
+          application/json: {"key": "<value>"}
+        "401": {}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500": {}
   deletePet:
     speakeasy-default-delete-pet:
       parameters:
         path:
           petId: 441876
         header: {}
+      responses:
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "408":
+          application/json: {"key": "<value>"}
+        "413":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>"}
   uploadFile:
     speakeasy-default-upload-file:
       parameters:
         path:
           petId: 565380
         query: {}
+      responses:
+        "400":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "404":
+          application/json: {"key": "<value>"}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "429":
+          application/json: {"key": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>"}
   getInventory:
     speakeasy-default-get-inventory:
       responses:
         "200":
           application/json: {"key": 373538}
+        "400":
+          application/json: {"key": "<value>"}
+        "401":
+          application/json: {"key": "<value>"}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "408": {}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>"}
   placeOrder:
     speakeasy-default-place-order-raw:
       responses:
         "200":
           application/json: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
+        "400":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "401":
+          application/json: {"key": "<value>"}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "408": {}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "500": {}
     speakeasy-default-place-order-form:
       requestBody:
         application/x-www-form-urlencoded: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
       responses:
         "200":
           application/json: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
+        "400":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "429": {}
+        "500":
+          application/json: {"key": "<value>"}
     speakeasy-default-place-order-json:
       responses:
         "200":
           application/json: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
+        "400": {}
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "408": {}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>"}
   getOrderById:
     speakeasy-default-get-order-by-id:
       parameters:
@@ -292,36 +477,121 @@ examples:
         "200":
           application/xml: "0x51EB64dCdd"
           application/json: {"id": 10, "petId": 198772, "quantity": 7, "status": "approved"}
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "408": {}
+        "413": {}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "501":
+          application/json: {"key": "<value>"}
   deleteOrder:
     speakeasy-default-delete-order:
       parameters:
         path:
           orderId: 127902
+      responses:
+        "408":
+          application/json: {"key": "<value>"}
+        "413":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "429":
+          application/json: {"key": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "501":
+          application/json: {"key": "<value>"}
   createUser:
     speakeasy-default-create-user-json:
       responses:
         default:
           application/xml: "0xdF8B4DBd5B"
+        "400":
+          application/json: {"key": "<value>"}
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "404":
+          application/json: {"key": "<value>"}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "429":
+          application/json: {"key": "<value>"}
+        "500": {}
     speakeasy-default-create-user-raw:
       responses:
         default:
           application/xml: "0xBdBEe6E5bE"
+        "400":
+          application/json: {"key": "<value>"}
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "404": {}
+        "408":
+          application/json: {"key": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
     speakeasy-default-create-user-form:
       responses:
         default:
           application/xml: "0xcBc71Bde80"
+        "400": {}
+        "401":
+          application/json: {"key": "<value>"}
+        "404": {}
+        "408":
+          application/json: {"key": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "500":
+          application/json: {"key": "<value>"}
   createUsersWithListInput:
     speakeasy-default-create-users-with-list-input:
       responses:
         "200":
           application/xml: "0x2C0b2D5cEE"
+        "400": {}
+        "401":
+          application/json: {"key": "<value>"}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "429": {}
+        "500":
+          application/json: {"key": "<value>"}
   loginUser:
     speakeasy-default-login-user:
       responses:
         "200":
           application/xml: "<value>"
           application/json: "<value>"
-  logoutUser: {}
+        "401": {}
+        "404": {}
+        "408": {}
+        "413":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+  logoutUser:
+    speakeasy-default-logout-user:
+      responses:
+        "400":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "401": {}
+        "404":
+          application/json: {"key": "<value>"}
+        "408":
+          application/json: {"key": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
   getUserByName:
     speakeasy-default-get-user-by-name:
       parameters:
@@ -330,6 +600,15 @@ examples:
       responses:
         "200":
           application/xml: "0xb60ad6AdFe"
+        "401": {}
+        "408": {}
+        "413":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "429":
+          application/json: {"key": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "501": {}
   updateUser:
     speakeasy-default-update-user-form:
       parameters:
@@ -337,17 +616,62 @@ examples:
           username: "Bo.Beatty-Mraz90"
       requestBody:
         application/x-www-form-urlencoded: {"id": 10, "username": "theUser", "firstName": "John", "lastName": "James", "email": "john@email.com", "password": "12345", "phone": "12345", "userStatus": 1}
+      responses:
+        "400":
+          application/json: {"key": "<value>"}
+        "401": {}
+        "404": {}
+        "408": {}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "500":
+          application/json: {"key": "<value>"}
     speakeasy-default-update-user-json:
       parameters:
         path:
           username: "Alanna98"
+      responses:
+        "400":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "401": {}
+        "404": {}
+        "408":
+          application/json: {"key": "<value>"}
+        "429": {}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
     speakeasy-default-update-user-raw:
       parameters:
         path:
           username: "Maximus_Gulgowski38"
+      responses:
+        "400":
+          application/json: {"key": "<value>"}
+        "401":
+          application/json: {"key": "<value>"}
+        "404": {}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "429":
+          application/json: {"key": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
   deleteUser:
     speakeasy-default-delete-user:
       parameters:
         path:
           username: "Demetris_Schmitt"
+      responses:
+        "401":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "408":
+          application/json: {"key": "<value>", "key1": "<value>"}
+        "413":
+          application/json: {"key": "<value>"}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
+        "501":
+          application/json: {"key": "<value>", "key1": "<value>"}
 generatedTests: {}

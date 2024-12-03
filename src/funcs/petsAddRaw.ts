@@ -17,6 +17,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../models/errors/httpclienterrors.js";
+import * as errors from "../models/errors/index.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
 import * as operations from "../models/operations/index.js";
 import { Result } from "../types/fp.js";
@@ -39,6 +40,12 @@ export async function petsAddRaw(
 ): Promise<
   Result<
     operations.AddPetRawResponse,
+    | errors.BadRequest
+    | errors.Unauthorized
+    | errors.NotFound
+    | errors.Timeout
+    | errors.RateLimited
+    | errors.InternalServerError
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -105,7 +112,34 @@ export async function petsAddRaw(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["405", "4XX", "5XX"],
+    errorCodes: [
+      "400",
+      "401",
+      "403",
+      "404",
+      "405",
+      "407",
+      "408",
+      "413",
+      "414",
+      "415",
+      "422",
+      "429",
+      "431",
+      "4XX",
+      "500",
+      "501",
+      "502",
+      "503",
+      "504",
+      "505",
+      "506",
+      "507",
+      "508",
+      "510",
+      "511",
+      "5XX",
+    ],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -114,8 +148,18 @@ export async function petsAddRaw(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
     operations.AddPetRawResponse,
+    | errors.BadRequest
+    | errors.Unauthorized
+    | errors.NotFound
+    | errors.Timeout
+    | errors.RateLimited
+    | errors.InternalServerError
     | APIError
     | SDKValidationError
     | UnexpectedClientError
@@ -128,8 +172,20 @@ export async function petsAddRaw(
       ctype: "application/xml",
     }),
     M.json(200, operations.AddPetRawResponse$inboundSchema),
+    M.jsonErr(
+      [400, 413, 414, 415, 422, 431, 510],
+      errors.BadRequest$inboundSchema,
+    ),
+    M.jsonErr([401, 403, 407, 511], errors.Unauthorized$inboundSchema),
+    M.jsonErr([404, 501, 505], errors.NotFound$inboundSchema),
     M.fail([405, "4XX", "5XX"]),
-  )(response);
+    M.jsonErr([408, 504], errors.Timeout$inboundSchema),
+    M.jsonErr(429, errors.RateLimited$inboundSchema),
+    M.jsonErr(
+      [500, 502, 503, 506, 507, 508],
+      errors.InternalServerError$inboundSchema,
+    ),
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return result;
   }

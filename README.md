@@ -105,7 +105,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pets.updateForm(
+  const result = await petstore.pets.updateJson(
     await openAsBlob("example.file"),
   );
 
@@ -139,7 +139,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pets.updateForm(
+  const result = await petstore.pets.updateJson(
     await openAsBlob("example.file"),
   );
 
@@ -183,9 +183,9 @@ run();
 
 ### [pets](docs/sdks/pets/README.md)
 
-* [updateForm](docs/sdks/pets/README.md#updateform) - Update an existing pet
 * [updateJson](docs/sdks/pets/README.md#updatejson) - Update an existing pet
 * [updateRaw](docs/sdks/pets/README.md#updateraw) - Update an existing pet
+* [updateForm](docs/sdks/pets/README.md#updateform) - Update an existing pet
 * [addJson](docs/sdks/pets/README.md#addjson) - Add a new pet to the store
 * [addRaw](docs/sdks/pets/README.md#addraw) - Add a new pet to the store
 * [addForm](docs/sdks/pets/README.md#addform) - Add a new pet to the store
@@ -215,9 +215,9 @@ run();
 * [login](docs/sdks/users/README.md#login) - Logs user into the system
 * [logout](docs/sdks/users/README.md#logout) - Logs out current logged in user session
 * [getByName](docs/sdks/users/README.md#getbyname) - Get user by user name
-* [updateJson](docs/sdks/users/README.md#updatejson) - Update user
 * [updateRaw](docs/sdks/users/README.md#updateraw) - Update user
 * [updateForm](docs/sdks/users/README.md#updateform) - Update user
+* [updateJson](docs/sdks/users/README.md#updatejson) - Update user
 * [delete](docs/sdks/users/README.md#delete) - Delete user
 
 </details>
@@ -294,7 +294,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pets.updateForm(
+  const result = await petstore.pets.updateJson(
     await openAsBlob("example.file"),
   );
 
@@ -322,7 +322,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pets.updateForm(
+  const result = await petstore.pets.updateJson(
     await openAsBlob("example.file"),
     {
       retries: {
@@ -366,7 +366,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pets.updateForm(
+  const result = await petstore.pets.updateJson(
     await openAsBlob("example.file"),
   );
 
@@ -394,16 +394,30 @@ If a HTTP request fails, an operation my also throw an error from the `models/er
 | InvalidRequestError                                  | Any input used to create a request is invalid        |
 | UnexpectedClientError                                | Unrecognised or unexpected error                     |
 
-In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `updateForm` method may throw the following errors:
+In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `updateJson` method may throw the following errors:
 
-| Error Type      | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| errors.APIError | 4XX, 5XX    | \*/\*        |
+| Error Type                 | Status Code                  | Content Type     |
+| -------------------------- | ---------------------------- | ---------------- |
+| errors.Unauthorized        | 401, 403, 407, 511           | application/json |
+| errors.Timeout             | 408, 504                     | application/json |
+| errors.BadRequest          | 413, 414, 415, 422, 431, 510 | application/json |
+| errors.RateLimited         | 429                          | application/json |
+| errors.InternalServerError | 500, 502, 503, 506, 507, 508 | application/json |
+| errors.NotFound            | 501, 505                     | application/json |
+| errors.APIError            | 4XX, 5XX                     | \*/\*            |
 
 ```typescript
 import { openAsBlob } from "node:fs";
 import { Petstore } from "petstore";
-import { SDKValidationError } from "petstore/models/errors";
+import {
+  BadRequest,
+  InternalServerError,
+  NotFound,
+  RateLimited,
+  SDKValidationError,
+  Timeout,
+  Unauthorized,
+} from "petstore/models/errors";
 
 const petstore = new Petstore({
   petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
@@ -412,7 +426,7 @@ const petstore = new Petstore({
 async function run() {
   let result;
   try {
-    result = await petstore.pets.updateForm(await openAsBlob("example.file"));
+    result = await petstore.pets.updateJson(await openAsBlob("example.file"));
 
     // Handle the result
     console.log(result);
@@ -423,6 +437,36 @@ async function run() {
         console.error(err.pretty());
         // Raw value may also be inspected
         console.error(err.rawValue);
+        return;
+      }
+      case (err instanceof Unauthorized): {
+        // Handle err.data$: UnauthorizedData
+        console.error(err);
+        return;
+      }
+      case (err instanceof Timeout): {
+        // Handle err.data$: TimeoutData
+        console.error(err);
+        return;
+      }
+      case (err instanceof BadRequest): {
+        // Handle err.data$: BadRequestData
+        console.error(err);
+        return;
+      }
+      case (err instanceof RateLimited): {
+        // Handle err.data$: RateLimitedData
+        console.error(err);
+        return;
+      }
+      case (err instanceof InternalServerError): {
+        // Handle err.data$: InternalServerErrorData
+        console.error(err);
+        return;
+      }
+      case (err instanceof NotFound): {
+        // Handle err.data$: NotFoundData
+        console.error(err);
         return;
       }
       default: {
@@ -455,7 +499,7 @@ const petstore = new Petstore({
 });
 
 async function run() {
-  const result = await petstore.pets.updateForm(
+  const result = await petstore.pets.updateJson(
     await openAsBlob("example.file"),
   );
 

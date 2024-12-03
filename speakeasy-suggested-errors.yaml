@@ -1,0 +1,1114 @@
+overlay: 1.0.0
+info:
+  title: Response Codes Overlay
+  version: 0.0.0
+actions:
+  - target: $["paths"]["/pet/findByStatus"]["get"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        findPetsByStatus:
+        	catch(SDKError) { ... }
+      after: |-
+        findPetsByStatus:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/pet/findByTags"]["get"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        findPetsByTags:
+        	catch(SDKError) { ... }
+      after: |-
+        findPetsByTags:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/pet"]["put"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        updatePet:
+        	catch(SDKError) { ... }
+      after: |-
+        updatePet:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/pet/{petId}"]["post"]["responses"]
+    update:
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        updatePetWithForm:
+        	catch(SDKError) { ... }
+      after: |-
+        updatePetWithForm:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/pet/{petId}/uploadImage"]["post"]["responses"]
+    update:
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        uploadFile:
+        	catch(SDKError) { ... }
+      after: |-
+        uploadFile:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/store/inventory"]["get"]["responses"]
+    update:
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        getInventory:
+        	catch(SDKError) { ... }
+      after: |-
+        getInventory:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/user/login"]["get"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        loginUser:
+        	catch(SDKError) { ... }
+      after: |-
+        loginUser:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/user/{username}"]["delete"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        deleteUser:
+        	catch(SDKError) { ... }
+      after: |-
+        deleteUser:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/pet/{petId}"]["get"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        getPetById:
+        	catch(SDKError) { ... }
+      after: |-
+        getPetById:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/pet/{petId}"]["delete"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        deletePet:
+        	catch(SDKError) { ... }
+      after: |-
+        deletePet:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/store/order"]["post"]["responses"]
+    update:
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        placeOrder:
+        	catch(SDKError) { ... }
+      after: |-
+        placeOrder:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/store/order/{orderId}"]["get"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        getOrderById:
+        	catch(SDKError) { ... }
+      after: |-
+        getOrderById:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/store/order/{orderId}"]["delete"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        deleteOrder:
+        	catch(SDKError) { ... }
+      after: |-
+        deleteOrder:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/pet"]["post"]["responses"]
+    update:
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        addPet:
+        	catch(SDKError) { ... }
+      after: |-
+        addPet:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/user"]["post"]["responses"]
+    update:
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        createUser:
+        	catch(SDKError) { ... }
+      after: |-
+        createUser:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/user/createWithList"]["post"]["responses"]
+    update:
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        createUsersWithListInput:
+        	catch(SDKError) { ... }
+      after: |-
+        createUsersWithListInput:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/user/logout"]["get"]["responses"]
+    update:
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        logoutUser:
+        	catch(SDKError) { ... }
+      after: |-
+        logoutUser:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/user/{username}"]["get"]["responses"]
+    update:
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        getUserByName:
+        	catch(SDKError) { ... }
+      after: |-
+        getUserByName:
+        	catch(Unauthorized) { ... }
+  - target: $["paths"]["/user/{username}"]["put"]["responses"]
+    update:
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      '413':
+        $ref: '#/components/responses/BadRequest'
+      '414':
+        $ref: '#/components/responses/BadRequest'
+      '415':
+        $ref: '#/components/responses/BadRequest'
+      '422':
+        $ref: '#/components/responses/BadRequest'
+      '431':
+        $ref: '#/components/responses/BadRequest'
+      '510':
+        $ref: '#/components/responses/BadRequest'
+      '401':
+        $ref: '#/components/responses/Unauthorized'
+      '403':
+        $ref: '#/components/responses/Unauthorized'
+      '407':
+        $ref: '#/components/responses/Unauthorized'
+      '511':
+        $ref: '#/components/responses/Unauthorized'
+      '404':
+        $ref: '#/components/responses/NotFound'
+      '501':
+        $ref: '#/components/responses/NotFound'
+      '505':
+        $ref: '#/components/responses/NotFound'
+      '429':
+        $ref: '#/components/responses/RateLimited'
+      '500':
+        $ref: '#/components/responses/InternalServerError'
+      '502':
+        $ref: '#/components/responses/InternalServerError'
+      '503':
+        $ref: '#/components/responses/InternalServerError'
+      '506':
+        $ref: '#/components/responses/InternalServerError'
+      '507':
+        $ref: '#/components/responses/InternalServerError'
+      '508':
+        $ref: '#/components/responses/InternalServerError'
+      '408':
+        $ref: '#/components/responses/Timeout'
+      '504':
+        $ref: '#/components/responses/Timeout'
+    x-speakeasy-metadata:
+      type: error-names
+      before: |-
+        updateUser:
+        	catch(SDKError) { ... }
+      after: |-
+        updateUser:
+        	catch(Unauthorized) { ... }
+  - target: $.components.schemas
+    update:
+      BadRequest:
+        type: object
+        properties:
+          message:
+            type: string
+        additionalProperties: true
+      Unauthorized:
+        type: object
+        properties:
+          message:
+            type: string
+        additionalProperties: true
+      NotFound:
+        type: object
+        properties:
+          message:
+            type: string
+        additionalProperties: true
+      RateLimited:
+        type: object
+        properties:
+          message:
+            type: string
+        additionalProperties: true
+      InternalServerError:
+        type: object
+        properties:
+          message:
+            type: string
+        additionalProperties: true
+      Timeout:
+        type: object
+        properties:
+          message:
+            type: string
+        additionalProperties: true
+  - target: $.components
+    update:
+      responses:
+        BadRequest:
+          description: A collection of codes that generally means the end user got something wrong in making the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        Unauthorized:
+          description: A collection of codes that generally means the client was not authenticated correctly for the request they want to make
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        NotFound:
+          description: Status codes relating to the resource/entity they are requesting not being found or endpoints/routes not existing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        RateLimited:
+          description: Status codes relating to the client being rate limited by the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimited'
+        InternalServerError:
+          description: A collection of status codes that generally mean the server failed in an unexpected way
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        Timeout:
+          description: Timeouts occurred with the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Timeout'
