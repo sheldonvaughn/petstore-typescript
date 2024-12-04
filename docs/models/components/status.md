@@ -7,7 +7,7 @@ pet status in the store
 ```typescript
 import { Status } from "petstore/models/components";
 
-let value: Status = "pending";
+let value: Status = "sold";
 ```
 
 ## Values

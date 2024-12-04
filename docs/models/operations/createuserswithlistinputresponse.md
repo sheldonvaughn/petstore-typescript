@@ -6,7 +6,7 @@
 ### `Uint8Array`
 
 ```typescript
-const value: Uint8Array = new TextEncoder().encode("0xcee9D89DBf");
+const value: Uint8Array = new TextEncoder().encode("0xccee9D89DB");
 ```
 
 ### `ReadableStream<Uint8Array>`

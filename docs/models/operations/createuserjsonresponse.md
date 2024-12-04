@@ -12,6 +12,6 @@ const value: ReadableStream<Uint8Array> = await openAsBlob("example.file");
 ### `Uint8Array`
 
 ```typescript
-const value: Uint8Array = new TextEncoder().encode("0xdc4E9Cf6B8");
+const value: Uint8Array = new TextEncoder().encode("0xcdc4E9Cf6B");
 ```
 

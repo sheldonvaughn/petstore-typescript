@@ -9,7 +9,6 @@ export * from "./createuserform.js";
 export * from "./createuserjson.js";
 export * from "./createuserraw.js";
 export * from "./createuserswithlistinput.js";
-export * from "./deleteorder.js";
 export * from "./deletepet.js";
 export * from "./deleteuser.js";
 export * from "./findpetsbystatus.js";

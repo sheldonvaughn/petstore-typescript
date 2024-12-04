@@ -17,7 +17,7 @@ Developer-friendly & type-safe Typescript SDK specifically catered to leverage *
 <!-- Start Summary [summary] -->
 ## Summary
 
-Swagger Petstore - OpenAPI 3.0: This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+Swagger Petstore - OpenAPI 3.0: This is a sample Pet Store Server based on the OpenAPI 3.0 specification. You can find out more about
 Swagger at [http://swagger.io](http://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
 You can now help us improve the API whether it's by making changes to the definition itself or to the code.
 That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
@@ -204,7 +204,6 @@ run();
 * [placeOrderRaw](docs/sdks/store/README.md#placeorderraw) - Place an order for a pet
 * [placeOrderForm](docs/sdks/store/README.md#placeorderform) - Place an order for a pet
 * [getOrderById](docs/sdks/store/README.md#getorderbyid) - Find purchase order by ID
-* [deleteOrder](docs/sdks/store/README.md#deleteorder) - Delete purchase order by ID
 
 ### [users](docs/sdks/users/README.md)
 
@@ -215,9 +214,9 @@ run();
 * [login](docs/sdks/users/README.md#login) - Logs user into the system
 * [logout](docs/sdks/users/README.md#logout) - Logs out current logged in user session
 * [getByName](docs/sdks/users/README.md#getbyname) - Get user by user name
+* [updateJson](docs/sdks/users/README.md#updatejson) - Update user
 * [updateRaw](docs/sdks/users/README.md#updateraw) - Update user
 * [updateForm](docs/sdks/users/README.md#updateform) - Update user
-* [updateJson](docs/sdks/users/README.md#updatejson) - Update user
 * [delete](docs/sdks/users/README.md#delete) - Delete user
 
 </details>
@@ -250,7 +249,6 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`petsUpdateRaw`](docs/sdks/pets/README.md#updateraw) - Update an existing pet
 - [`petsUpdateWithForm`](docs/sdks/pets/README.md#updatewithform) - Updates a pet in the store with form data
 - [`petsUploadFile`](docs/sdks/pets/README.md#uploadfile) - uploads an image
-- [`storeDeleteOrder`](docs/sdks/store/README.md#deleteorder) - Delete purchase order by ID
 - [`storeGetInventory`](docs/sdks/store/README.md#getinventory) - Returns pet inventories by status
 - [`storeGetOrderById`](docs/sdks/store/README.md#getorderbyid) - Find purchase order by ID
 - [`storePlaceOrderForm`](docs/sdks/store/README.md#placeorderform) - Place an order for a pet

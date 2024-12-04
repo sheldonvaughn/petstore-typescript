@@ -15,7 +15,6 @@ Find out more about our store
 * [placeOrderRaw](#placeorderraw) - Place an order for a pet
 * [placeOrderForm](#placeorderform) - Place an order for a pet
 * [getOrderById](#getorderbyid) - Find purchase order by ID
-* [deleteOrder](#deleteorder) - Delete purchase order by ID
 
 ## getInventory
 
@@ -408,86 +407,6 @@ run();
 ### Response
 
 **Promise\<[operations.GetOrderByIdResponse](../../models/operations/getorderbyidresponse.md)\>**
-
-### Errors
-
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| errors.Unauthorized          | 401, 403, 407, 511           | application/json             |
-| errors.Timeout               | 408, 504                     | application/json             |
-| errors.BadRequest            | 413, 414, 415, 422, 431, 510 | application/json             |
-| errors.RateLimited           | 429                          | application/json             |
-| errors.InternalServerError   | 500, 502, 503, 506, 507, 508 | application/json             |
-| errors.NotFound              | 501, 505                     | application/json             |
-| errors.APIError              | 4XX, 5XX                     | \*/\*                        |
-
-## deleteOrder
-
-For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
-
-### Example Usage
-
-```typescript
-import { Petstore } from "petstore";
-
-const petstore = new Petstore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  await petstore.store.deleteOrder({
-    orderId: 127902,
-  });
-
-
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { PetstoreCore } from "petstore/core.js";
-import { storeDeleteOrder } from "petstore/funcs/storeDeleteOrder.js";
-
-// Use `PetstoreCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const petstore = new PetstoreCore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await storeDeleteOrder(petstore, {
-    orderId: 127902,
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [operations.DeleteOrderRequest](../../models/operations/deleteorderrequest.md)                                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<void\>**
 
 ### Errors
 
