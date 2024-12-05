@@ -5,8 +5,9 @@ management:
   docVersion: 1.0.19
   speakeasyVersion: 1.451.7
   generationVersion: 2.471.2
-  releaseVersion: 0.2.3
-  configChecksum: 57cf554091f649fe9ca515cdcc0fa4b9
+  releaseVersion: 0.2.4
+  configChecksum: 9be7774cd6c2ba7e1b43e2a5815841a6
+  repoURL: https://github.com/sheldonvaughn/petstore-typescript.git
   installationURL: https://github.com/sheldonvaughn/petstore-typescript
 features:
   typescript:

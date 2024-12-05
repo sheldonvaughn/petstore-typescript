@@ -6,7 +6,7 @@
 ### `Uint8Array`
 
 ```typescript
-const value: Uint8Array = new TextEncoder().encode("0xc9F243e5a5");
+const value: Uint8Array = new TextEncoder().encode("0x5Bac0dddEf");
 ```
 
 ### `components.Pet2`
