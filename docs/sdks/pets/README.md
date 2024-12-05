@@ -8,9 +8,9 @@
 * [updateJson](#updatejson) - Update an existing pet
 * [updateRaw](#updateraw) - Update an existing pet
 * [updateForm](#updateform) - Update an existing pet
+* [addForm](#addform) - Add a new pet to the store
 * [addJson](#addjson) - Add a new pet to the store
 * [addRaw](#addraw) - Add a new pet to the store
-* [addForm](#addform) - Add a new pet to the store
 * [findByStatus](#findbystatus) - Finds Pets by status
 * [findByTags](#findbytags) - Finds Pets by tags
 * [get](#get) - Find pet by ID
@@ -258,6 +258,104 @@ run();
 | errors.NotFound              | 501, 505                     | application/json             |
 | errors.APIError              | 4XX, 5XX                     | \*/\*                        |
 
+## addForm
+
+Add a new pet to the store
+
+### Example Usage
+
+```typescript
+import { Petstore } from "petstore";
+
+const petstore = new Petstore({
+  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const result = await petstore.pets.addForm({
+    id: 10,
+    name: "doggie",
+    category: {
+      id: 1,
+      name: "Dogs",
+    },
+    photoUrls: [
+      "<value>",
+    ],
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { PetstoreCore } from "petstore/core.js";
+import { petsAddForm } from "petstore/funcs/petsAddForm.js";
+
+// Use `PetstoreCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const petstore = new PetstoreCore({
+  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
+});
+
+async function run() {
+  const res = await petsAddForm(petstore, {
+    id: 10,
+    name: "doggie",
+    category: {
+      id: 1,
+      name: "Dogs",
+    },
+    photoUrls: [
+      "<value>",
+    ],
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [components.Pet2](../../models/components/pet2.md)                                                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.AddPetFormResponse](../../models/operations/addpetformresponse.md)\>**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
+| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
+| errors.NotFound                   | 404, 501, 505                     | application/json                  |
+| errors.Timeout                    | 408, 504                          | application/json                  |
+| errors.RateLimited                | 429                               | application/json                  |
+| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
+| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
+
 ## addJson
 
 Add a new pet to the store
@@ -401,104 +499,6 @@ run();
 ### Response
 
 **Promise\<[operations.AddPetRawResponse](../../models/operations/addpetrawresponse.md)\>**
-
-### Errors
-
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| errors.BadRequest                 | 400, 413, 414, 415, 422, 431, 510 | application/json                  |
-| errors.Unauthorized               | 401, 403, 407, 511                | application/json                  |
-| errors.NotFound                   | 404, 501, 505                     | application/json                  |
-| errors.Timeout                    | 408, 504                          | application/json                  |
-| errors.RateLimited                | 429                               | application/json                  |
-| errors.InternalServerError        | 500, 502, 503, 506, 507, 508      | application/json                  |
-| errors.APIError                   | 4XX, 5XX                          | \*/\*                             |
-
-## addForm
-
-Add a new pet to the store
-
-### Example Usage
-
-```typescript
-import { Petstore } from "petstore";
-
-const petstore = new Petstore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const result = await petstore.pets.addForm({
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value>",
-    ],
-  });
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Standalone function
-
-The standalone function version of this method:
-
-```typescript
-import { PetstoreCore } from "petstore/core.js";
-import { petsAddForm } from "petstore/funcs/petsAddForm.js";
-
-// Use `PetstoreCore` for best tree-shaking performance.
-// You can create one instance of it to use across an application.
-const petstore = new PetstoreCore({
-  petstoreAuth: process.env["PETSTORE_PETSTORE_AUTH"] ?? "",
-});
-
-async function run() {
-  const res = await petsAddForm(petstore, {
-    id: 10,
-    name: "doggie",
-    category: {
-      id: 1,
-      name: "Dogs",
-    },
-    photoUrls: [
-      "<value>",
-    ],
-  });
-
-  if (!res.ok) {
-    throw res.error;
-  }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
-}
-
-run();
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                                                      | [components.Pet2](../../models/components/pet2.md)                                                                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
-| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
-| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
-| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
-
-### Response
-
-**Promise\<[operations.AddPetFormResponse](../../models/operations/addpetformresponse.md)\>**
 
 ### Errors
 

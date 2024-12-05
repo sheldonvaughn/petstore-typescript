@@ -128,7 +128,6 @@ export async function petsAddJson(
       "401",
       "403",
       "404",
-      "405",
       "407",
       "408",
       "413",
@@ -189,13 +188,13 @@ export async function petsAddJson(
     ),
     M.jsonErr([401, 403, 407, 511], errors.Unauthorized$inboundSchema),
     M.jsonErr([404, 501, 505], errors.NotFound$inboundSchema),
-    M.fail([405, "4XX", "5XX"]),
     M.jsonErr([408, 504], errors.Timeout$inboundSchema),
     M.jsonErr(429, errors.RateLimited$inboundSchema),
     M.jsonErr(
       [500, 502, 503, 506, 507, 508],
       errors.InternalServerError$inboundSchema,
     ),
+    M.fail(["4XX", "5XX"]),
   )(response, { extraFields: responseFields });
   if (!result.ok) {
     return result;

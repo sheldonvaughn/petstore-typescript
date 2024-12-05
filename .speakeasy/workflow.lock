@@ -1,9 +1,9 @@
-speakeasyVersion: 1.451.1
+speakeasyVersion: 1.451.7
 sources:
     Swagger Petstore - OpenAPI 3.0:
         sourceNamespace: swagger-petstore---open-api-3-0
-        sourceRevisionDigest: sha256:c1ef1a826912b1bb151b29182d3393742ce2dead2c737810a5c1bb42e95e5eab
-        sourceBlobDigest: sha256:382c419fd57e294acc8b5ecec28c2367cad37c620ba0ef9276f4afdebdc60e3b
+        sourceRevisionDigest: sha256:1c031e67ac5bcdf756c225e1c18740a839f6f2776bf5052c77afdd47bdbefa3e
+        sourceBlobDigest: sha256:9ea0fb3fd10661d6a7614f5ce460e67e89576add23e0334cbd4e9fd54b4297fc
         tags:
             - latest
             - 1.0.19
@@ -11,10 +11,10 @@ targets:
     petstore:
         source: Swagger Petstore - OpenAPI 3.0
         sourceNamespace: swagger-petstore---open-api-3-0
-        sourceRevisionDigest: sha256:c1ef1a826912b1bb151b29182d3393742ce2dead2c737810a5c1bb42e95e5eab
-        sourceBlobDigest: sha256:382c419fd57e294acc8b5ecec28c2367cad37c620ba0ef9276f4afdebdc60e3b
+        sourceRevisionDigest: sha256:1c031e67ac5bcdf756c225e1c18740a839f6f2776bf5052c77afdd47bdbefa3e
+        sourceBlobDigest: sha256:9ea0fb3fd10661d6a7614f5ce460e67e89576add23e0334cbd4e9fd54b4297fc
         codeSamplesNamespace: swagger-petstore---open-api-3-0-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:cbe7bc71b68ef58237663256a9f4891cdf0d4cc130acf1dc37a806233065e51b
+        codeSamplesRevisionDigest: sha256:0dc0c1b4cc8e2ae3562752965470a5f58bc10d1190beede2fb5353cbcb57d85d
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

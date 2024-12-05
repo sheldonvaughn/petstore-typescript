@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 6001198f-1296-495e-92b0-9e0dfa3802c0
 management:
-  docChecksum: 8d9e9c387eb14922b78a32f2e40c6185
+  docChecksum: 76ba47742f4a8d387592306c946883ce
   docVersion: 1.0.19
-  speakeasyVersion: 1.451.1
-  generationVersion: 2.470.1
-  releaseVersion: 0.2.1
-  configChecksum: ecad1698baf407b61e0110c839ffedfe
+  speakeasyVersion: 1.451.7
+  generationVersion: 2.471.2
+  releaseVersion: 0.2.3
+  configChecksum: 57cf554091f649fe9ca515cdcc0fa4b9
   installationURL: https://github.com/sheldonvaughn/petstore-typescript
 features:
   typescript:
@@ -212,10 +212,12 @@ examples:
           application/json: {"key": "<value>", "key1": "<value>"}
         "408":
           application/json: {"key": "<value>", "key1": "<value>"}
-        "413": {}
+        "413":
+          application/json: {"key": "<value>", "key1": "<value>"}
         "429":
           application/json: {"key": "<value>"}
-        "500": {}
+        "500":
+          application/json: {"key": "<value>", "key1": "<value>"}
         "501":
           application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
     speakeasy-default-update-pet-raw:
@@ -242,8 +244,10 @@ examples:
           application/json: {"key": "<value>"}
         "408":
           application/json: {"key": "<value>"}
-        "413": {}
-        "429": {}
+        "413":
+          application/json: {"key": "<value>"}
+        "429":
+          application/json: {"key": "<value>"}
         "500":
           application/json: {"key": "<value>", "key1": "<value>"}
         "501":
@@ -296,7 +300,8 @@ examples:
           application/json: {"key": "<value>"}
         "404":
           application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
-        "408": {}
+        "408":
+          application/json: {"key": "<value>"}
         "429":
           application/json: {"key": "<value>", "key1": "<value>"}
         "500":
@@ -331,7 +336,8 @@ examples:
           application/json: {"key": "<value>"}
         "408":
           application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
-        "413": {}
+        "413":
+          application/json: {"key": "<value>"}
         "429":
           application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
         "500":
@@ -374,7 +380,8 @@ examples:
           application/json: {"key": "<value>", "key1": "<value>"}
         "429":
           application/json: {"key": "<value>", "key1": "<value>"}
-        "500": {}
+        "500":
+          application/json: {"key": "<value>"}
   deletePet:
     speakeasy-default-delete-pet:
       parameters:
@@ -494,7 +501,8 @@ examples:
           application/json: {"key": "<value>", "key1": "<value>"}
         "408":
           application/json: {"key": "<value>", "key1": "<value>"}
-        "413": {}
+        "413":
+          application/json: {"key": "<value>", "key1": "<value>"}
         "429":
           application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
         "500":
@@ -641,8 +649,10 @@ examples:
           application/json: {"key": "<value>"}
         "401":
           application/json: {"key": "<value>"}
-        "404": {}
-        "408": {}
+        "404":
+          application/json: {"key": "<value>"}
+        "408":
+          application/json: {"key": "<value>"}
         "429":
           application/json: {"key": "<value>", "key1": "<value>"}
         "500":
@@ -656,10 +666,12 @@ examples:
           application/json: {"key": "<value>", "key1": "<value>"}
         "401":
           application/json: {"key": "<value>", "key1": "<value>"}
-        "404": {}
+        "404":
+          application/json: {"key": "<value>", "key1": "<value>"}
         "408":
           application/json: {"key": "<value>"}
-        "429": {}
+        "429":
+          application/json: {"key": "<value>", "key1": "<value>"}
         "500":
           application/json: {"key": "<value>", "key1": "<value>", "key2": "<value>"}
     speakeasy-default-update-user-raw:

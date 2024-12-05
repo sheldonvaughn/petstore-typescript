@@ -186,9 +186,9 @@ run();
 * [updateJson](docs/sdks/pets/README.md#updatejson) - Update an existing pet
 * [updateRaw](docs/sdks/pets/README.md#updateraw) - Update an existing pet
 * [updateForm](docs/sdks/pets/README.md#updateform) - Update an existing pet
+* [addForm](docs/sdks/pets/README.md#addform) - Add a new pet to the store
 * [addJson](docs/sdks/pets/README.md#addjson) - Add a new pet to the store
 * [addRaw](docs/sdks/pets/README.md#addraw) - Add a new pet to the store
-* [addForm](docs/sdks/pets/README.md#addform) - Add a new pet to the store
 * [findByStatus](docs/sdks/pets/README.md#findbystatus) - Finds Pets by status
 * [findByTags](docs/sdks/pets/README.md#findbytags) - Finds Pets by tags
 * [get](docs/sdks/pets/README.md#get) - Find pet by ID
