@@ -37,11 +37,11 @@ export { UpdateRawAcceptEnum } from "../funcs/petsUpdateRaw.js";
 
 export { UpdateFormAcceptEnum } from "../funcs/petsUpdateForm.js";
 
+export { AddRawAcceptEnum } from "../funcs/petsAddRaw.js";
+
 export { AddFormAcceptEnum } from "../funcs/petsAddForm.js";
 
 export { AddJsonAcceptEnum } from "../funcs/petsAddJson.js";
-
-export { AddRawAcceptEnum } from "../funcs/petsAddRaw.js";
 
 export { FindByStatusAcceptEnum } from "../funcs/petsFindByStatus.js";
 
@@ -107,6 +107,23 @@ export class Pets extends ClientSDK {
    * @remarks
    * Add a new pet to the store
    */
+  async addRaw(
+    request: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array,
+    options?: RequestOptions & { acceptHeaderOverride?: AddRawAcceptEnum },
+  ): Promise<operations.AddPetRawResponse> {
+    return unwrapAsync(petsAddRaw(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Add a new pet to the store
+   *
+   * @remarks
+   * Add a new pet to the store
+   */
   async addForm(
     request: components.Pet2,
     options?: RequestOptions & { acceptHeaderOverride?: AddFormAcceptEnum },
@@ -129,23 +146,6 @@ export class Pets extends ClientSDK {
     options?: RequestOptions & { acceptHeaderOverride?: AddJsonAcceptEnum },
   ): Promise<operations.AddPetJsonResponse> {
     return unwrapAsync(petsAddJson(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Add a new pet to the store
-   *
-   * @remarks
-   * Add a new pet to the store
-   */
-  async addRaw(
-    request: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array,
-    options?: RequestOptions & { acceptHeaderOverride?: AddRawAcceptEnum },
-  ): Promise<operations.AddPetRawResponse> {
-    return unwrapAsync(petsAddRaw(
       this,
       request,
       options,

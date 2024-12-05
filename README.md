@@ -186,9 +186,9 @@ run();
 * [updateJson](docs/sdks/pets/README.md#updatejson) - Update an existing pet
 * [updateRaw](docs/sdks/pets/README.md#updateraw) - Update an existing pet
 * [updateForm](docs/sdks/pets/README.md#updateform) - Update an existing pet
+* [addRaw](docs/sdks/pets/README.md#addraw) - Add a new pet to the store
 * [addForm](docs/sdks/pets/README.md#addform) - Add a new pet to the store
 * [addJson](docs/sdks/pets/README.md#addjson) - Add a new pet to the store
-* [addRaw](docs/sdks/pets/README.md#addraw) - Add a new pet to the store
 * [findByStatus](docs/sdks/pets/README.md#findbystatus) - Finds Pets by status
 * [findByTags](docs/sdks/pets/README.md#findbytags) - Finds Pets by tags
 * [get](docs/sdks/pets/README.md#get) - Find pet by ID
@@ -214,9 +214,9 @@ run();
 * [login](docs/sdks/users/README.md#login) - Logs user into the system
 * [logout](docs/sdks/users/README.md#logout) - Logs out current logged in user session
 * [getByName](docs/sdks/users/README.md#getbyname) - Get user by user name
-* [updateJson](docs/sdks/users/README.md#updatejson) - Update user
 * [updateRaw](docs/sdks/users/README.md#updateraw) - Update user
 * [updateForm](docs/sdks/users/README.md#updateform) - Update user
+* [updateJson](docs/sdks/users/README.md#updatejson) - Update user
 * [delete](docs/sdks/users/README.md#delete) - Delete user
 
 </details>
